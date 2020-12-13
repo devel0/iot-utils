@@ -6,7 +6,12 @@ Utilities for ststm32 platform, mbed os framework.
 
 - [double to string][1]
 
-[1]: 
+[1]: https://github.com/devel0/iot-utils/blob/d24eb41871fdbacb68edf2786f50ba79ad585a25/include%2Fstring-utils.h#L14
+
+## Quickstart
+
+can try installing the library from [platformio registry](https://platformio.org/lib/show/11564/iot-utils/installation)
+but I was unable to make include/linker to work with vscode so in case just copy .h,.cpp files to your project.
 
 ## Examples
 
@@ -15,8 +20,8 @@ Utilities for ststm32 platform, mbed os framework.
 ```cpp
 #include <mbed.h>
 
-#include "number-utils.h"
-#include "string-utils.h"
+#include <number-utils.h>
+#include <string-utils.h>
 
 int main()
 {

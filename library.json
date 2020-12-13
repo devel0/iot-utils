@@ -1,0 +1,36 @@
+{
+    "name": "iot-utils",
+    "version": "0.2.1",
+    "description": "Utilities for ststm32 platform, mbed os framework.",
+    "keywords": "util,string,double",
+    "authors": {
+        "name": "Lorenzo Delana",
+        "email": "lorenzo.delana@gmail.com"
+    },
+    "license": "MIT",
+    "frameworks": [
+        "ststm32"
+    ],
+    "platforms": [
+        "mbed"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/devel0/iot-utils.git"
+    },
+    "examples": [
+        {
+            "name": "example01",
+            "base": "examples/example01",
+            "files": [                
+                "example01.cpp"
+            ]
+        }
+    ],
+    "export": {
+        "exclude":
+        [
+            "src/debug-main.cpp"
+        ]
+    }
+}
