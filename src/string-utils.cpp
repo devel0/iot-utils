@@ -16,8 +16,8 @@ std::string tostr(double d, int decimals)
         exc = abs(b10exp) - 17 + 1;
     else if (b10exp > 17)
         exc = -abs(b10exp) - 17 + 1;
-    
-    double q = pow(10, b10exp + absDecimals + exc); // - round(log10(abs(b10mantissa))));
+
+    double q = pow(10, b10exp + absDecimals + exc);
     double d2 = ((double)b10mantissa * q);
     double pp = pow(10, -absDecimals - exc);
     d = round(d2) * pp;
@@ -52,11 +52,11 @@ std::string tostr(double d, int decimals)
                 ++decCnt;
             ss << strtmp[i];
         }
-        ss << "e" << b10exp + l - 1; // + exc;
+        ss << "e" << b10exp + l - 1;
     }
     else
     {
-        if (b10exp < 0) // ie. 0.0001 ( 1e-4 ), 1234.5678 (12345678e-4)
+        if (b10exp < 0)
         {
             int decCnt = 0;
             int ee = -b10exp;
@@ -83,7 +83,7 @@ std::string tostr(double d, int decimals)
                 ss << strtmp[i];
             }
         }
-        else // ie. 1.234 (1.234e0), 4500.12 (4.50012e3)
+        else
         {
             int decCnt = 0;
             int i = 0;
