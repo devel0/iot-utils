@@ -85,5 +85,5 @@ note: you may need to press RESET btn when in monitor to run tests
 ## How this project was built
 
 References:
-- [Creating Librart](https://docs.platformio.org/en/latest/librarymanager/creating.html?utm_medium=piohome&utm_source=platformio)
+- [Creating Library](https://docs.platformio.org/en/latest/librarymanager/creating.html?utm_medium=piohome&utm_source=platformio)
 - [library.json](https://docs.platformio.org/en/latest/librarymanager/config.html)
