@@ -10,8 +10,9 @@ Utilities for ststm32 platform, mbed os framework.
 
 ## Quickstart
 
-can try installing the library from [platformio registry](https://platformio.org/lib/show/11564/iot-utils/installation)
-but I was unable to make include/linker to work with vscode so in case just copy .h,.cpp files to your project.
+Install using vscode command palette `PlatformIO: New Terminal` referring to [platformio registry](https://platformio.org/lib/show/11564/iot-utils/installation) cli mode doc.
+
+If got trouble during compile, remove `.pio/libdeps/nucleo_f446re/iot-utils/library.json`.
 
 ## Examples
 
