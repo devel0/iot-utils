@@ -6,11 +6,10 @@
 /*
 convert given double to string
 @param d value to convert to string
-@param decimals any value negative means scientific notation forced;
-if positive value given fixed decimals representation rounding to last decimal
-(if great than 15 turn scientific mode automatically)
+@param decimals number of decimals to show rounding on last decimal; if negative or digits+b10exp exceed 15 length then scimode is selected automatically
+@param trim_leading_zeroes if true autoremove decimals ending zeroes
 @return string representation of given value
 */
-std::string tostr(double d, int decimals = -17);
+std::string tostr(double d, int decimals = -17, bool trim_leading_zeroes = true);
 
 #endif

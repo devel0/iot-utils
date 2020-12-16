@@ -3,7 +3,7 @@
 #include "string-utils.h"
 #include "number-utils.h"
 
-std::string tostr(double d, int decimals)
+std::string tostr(double d, int decimals, bool trim_leading_zeroes)
 {
     stringstream ss;
 
@@ -40,19 +40,25 @@ std::string tostr(double d, int decimals)
     const string &strtmp = sstmp.str();
 
     int l = strtmp.length();
+    bool sciMode = false;
+    bool someDecimals = false;
 
-    if (abs(b10exp) > 15 || decimals < 0)
+    if (abs(l + b10exp) > 15 || decimals < 0)
     {
         int decCnt = 0;
         for (int i = 0; i < l && decCnt < absDecimals; ++i)
         {
             if (i == 1)
+            {
                 ss << '.';
+                someDecimals = true;
+            }
             if (i > 0)
                 ++decCnt;
             ss << strtmp[i];
         }
         ss << "e" << b10exp + l - 1;
+        sciMode = true;
     }
     else
     {
@@ -64,6 +70,7 @@ std::string tostr(double d, int decimals)
             if (onDec)
             {
                 ss << "0.";
+                someDecimals = true;
                 while (ee-- > l)
                 {
                     ss << '0';
@@ -76,6 +83,7 @@ std::string tostr(double d, int decimals)
                 if (i == eeDot)
                 {
                     ss << '.';
+                    someDecimals = true;
                     onDec = true;
                 }
                 if (onDec)
@@ -96,11 +104,57 @@ std::string tostr(double d, int decimals)
                 if (decCnt >= decimals)
                     break;
                 if (i == b10exp)
+                {
                     ss << '.';
+                    someDecimals = true;
+                }
                 ++i;
             }
         }
     }
 
-    return ss.str();
+    string s = ss.str();
+
+    if (trim_leading_zeroes && someDecimals)
+    {
+        int sl = s.length();
+        if (sl > 0)
+        {
+            int j = sl - 1;
+            while (sciMode && j >= 0)
+            {
+                if (s[j] == 'e')
+                    break;
+                --j;
+            }
+            int u = j - 1;
+            while (u >= 0)
+            {
+                if (s[u] != '0')
+                {
+                    if (s[u] == '.')
+                        --u;
+                    break;
+                }
+                --u;
+            }
+            if (u != j - 1)
+            {
+                stringstream sst;
+
+                for (int k = 0; k <= u; ++k)
+                {
+                    sst << s[k];
+                }
+                for (int k = j; k <= sl; ++k)
+                {
+                    sst << s[k];
+                }
+
+                return sst.str();
+            }
+        }
+    }
+
+    return s;
 }

@@ -26,39 +26,28 @@ If got trouble during compile, remove `.pio/libdeps/nucleo_f446re/iot-utils/libr
 
 int main()
 {
-    printf("START\n");
+    printf("%s\n", tostr(1234.5678901234567, 4).c_str());       // 1234.5679
+    printf("%s\n", tostr(-1234.5678901234567, 4).c_str());      // -1234.5679
 
-    printf("[%s]\n", tostr(1234.5678901234567, 4).c_str());
-    printf("[%s]\n", tostr(-1234.5678901234567, 4).c_str());
+    printf("%s\n", tostr(1234.5678901234567, 10).c_str());      // 1234.5678901235
+    printf("%s\n", tostr(-1234.5678901234567, 10).c_str());     // -1234.5678901235
 
-    printf("[%s]\n", tostr(1234.5678901234567, 10).c_str());
-    printf("[%s]\n", tostr(-1234.5678901234567, 10).c_str());
+    printf("%s\n", tostr(1234.5678901234567e-8, 6).c_str());    // 0.000012
+    printf("%s\n", tostr(-1234.5678901234567e-8, 6).c_str());   // -0.000012
 
-    printf("[%s]\n", tostr(1234.5678901234567e-8, 6).c_str());
-    printf("[%s]\n", tostr(-1234.5678901234567e-8, 6).c_str());
+    printf("%s\n", tostr(1234.5678901234567e100, 6).c_str());   // 1.234568e103
+    printf("%s\n", tostr(-1234.5678901234567e100, 6).c_str());  // -1.234568e103
 
-    printf("[%s]\n", tostr(1234.5678901234567e100, 6).c_str());
-    printf("[%s]\n", tostr(-1234.5678901234567e100, 6).c_str());
+    printf("%s\n", tostr(1234.5678901234567e-100, 6).c_str());  // 1.234568e-97
+    printf("%s\n", tostr(-1234.5678901234567e-100, 6).c_str()); // -1.234568e-97
 
-    printf("[%s]\n", tostr(1234.5678901234567e-100, 6).c_str());
-    printf("[%s]\n", tostr(-1234.5678901234567e-100, 6).c_str());
+    printf("%s\n", tostr(1).c_str());                   // 1e0
+    printf("%s\n", tostr(1e20).c_str());                // 1e20
+    printf("%s\n", tostr(1e20, 4).c_str());             // 1e20
+    printf("%s\n", tostr(1e20, 4, false).c_str());      // 1.0000e20
+    printf("%s\n", tostr(1, 4, false).c_str());         // 1.0000
+    printf("%s\n", tostr(1.01200).c_str());             // 1.012e0
 }
-```
-
-produce follow
-
-```
-START
-[1234.5679]
-[-1234.5679]
-[1234.5678901235]
-[-1234.5678901235]
-[1.234568e-5]
-[-1.234568e-5]
-[1.234568e103]
-[-1.234568e103]
-[1.234568e-97]
-[-1.234568e-97]
 ```
 
 ## Debugging
