@@ -63,7 +63,7 @@ START
 
 ## Debugging
 
-to debug examples/example01.cpp if may needed to select only 1 platform from `platformio.ini` so the launch.json will generate accordingly; todo that comment others platform, ie:
+to debug examples/example01.cpp (included through [src/debug-main.cpp](src/debug-main.cpp)) it may needed to select only 1 platform from `platformio.ini` so the launch.json will generate accordingly; todo that comment others platform, ie:
 
 ```
 [env]
