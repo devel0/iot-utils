@@ -4,9 +4,11 @@
 
 Utilities for ststm32 platform, mbed os framework.
 
-- [double to string][1]
+- [extract mantissa, exp base 10][1]
+- [double to string][2]
 
-[1]: https://github.com/devel0/iot-utils/blob/d24eb41871fdbacb68edf2786f50ba79ad585a25/include%2Fstring-utils.h#L14
+[1]: https://github.com/devel0/iot-utils/blob/d24eb41871fdbacb68edf2786f50ba79ad585a25/include%2Fnumber-utils.h#L12
+[1]: https://github.com/devel0/iot-utils/blob/5fdf781f97cb69752d66480991e3c378ed6a4d17/include%2Fstring-utils.h#L13
 
 ## Quickstart
 
@@ -80,7 +82,9 @@ debug_build_flags = -O0 -g -ggdb
 
 ## Unit tests
 
-from vscode command palette `PlatformIO: New Terminal` then
+Test available [here](test/test-main.cpp).
+
+To execute tests, from vscode command palette `PlatformIO: New Terminal` then
 
 ```sh
 pio test
