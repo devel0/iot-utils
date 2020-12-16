@@ -3,7 +3,7 @@
 #include "string-utils.h"
 #include "number-utils.h"
 
-std::string tostr(double d, int decimals)
+std::string tostr(double d, int decimals=-17)
 {
     stringstream ss;
 

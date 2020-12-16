@@ -1,6 +1,6 @@
 {
     "name": "iot-utils",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "Utilities for ststm32 platform, mbed os framework.",
     "keywords": "util,string,double",
     "authors": {
