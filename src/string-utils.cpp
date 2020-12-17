@@ -10,22 +10,15 @@ std::string tostr(double d, int decimals, bool trim_leading_zeroes)
     // provide rounding
     int b10exp = 0;
     int64_t b10mantissa = frexp10(d, &b10exp);
+    int mantLen = round(log10(abs(b10mantissa))) + 1;
+    bool sciMode = abs(mantLen + b10exp) > 15 || decimals < 0;
     int absDecimals = decimals < 0 ? -decimals : decimals;
-    int exc = 0;
-    if (b10exp < -17)
-        exc = abs(b10exp) - 17 + 1;
-    else if (b10exp > 17)
-        exc = -abs(b10exp) - 17 + 1;
 
-    double q = pow(10, b10exp + absDecimals + exc);
+    double q = pow(10, sciMode ? -(mantLen - absDecimals - 1) : (b10exp + absDecimals));
     double d2 = ((double)b10mantissa * q);
-    double pp = pow(10, -absDecimals - exc);
-    d = round(d2) * pp;
+    d = round(d2) * pow(10, sciMode ? (b10exp + mantLen - absDecimals - 1) : -absDecimals);
 
     // final processing
-    double k = 1;
-    if (exc != 0)
-        k = pow(10, -exc);
     b10mantissa = frexp10(d, &b10exp);
 
     bool neg = b10mantissa < 0 ? 1 : 0;
@@ -40,10 +33,10 @@ std::string tostr(double d, int decimals, bool trim_leading_zeroes)
     const string &strtmp = sstmp.str();
 
     int l = strtmp.length();
-    bool sciMode = false;
+
     bool someDecimals = false;
 
-    if (abs(l + b10exp) > 15 || decimals < 0)
+    if (sciMode)
     {
         int decCnt = 0;
         for (int i = 0; i < l && decCnt < absDecimals; ++i)
@@ -62,7 +55,7 @@ std::string tostr(double d, int decimals, bool trim_leading_zeroes)
     }
     else
     {
-        if (b10exp < 0)
+        if (l + b10exp < 0)
         {
             int decCnt = 0;
             int ee = -b10exp;
@@ -95,19 +88,27 @@ std::string tostr(double d, int decimals, bool trim_leading_zeroes)
         {
             int decCnt = 0;
             int i = 0;
+            int dst = abs(l + b10exp);
             while (i < l)
             {
-                ss << strtmp[i];
-
-                if (i > b10exp)
-                    ++decCnt;
-                if (decCnt >= decimals)
+                if (i >= dst + decimals)
                     break;
-                if (i == b10exp)
+
+                if (i == dst)
                 {
                     ss << '.';
                     someDecimals = true;
                 }
+
+                ss << strtmp[i];
+
+                if (i >= dst)
+                {
+                    ++decCnt;
+                    if (decCnt >= decimals)
+                        break;
+                }
+
                 ++i;
             }
         }
@@ -127,7 +128,7 @@ std::string tostr(double d, int decimals, bool trim_leading_zeroes)
                     break;
                 --j;
             }
-            int u = j - 1;
+            int u = j - (sciMode ? 1 : 0);
             while (u >= 0)
             {
                 if (s[u] != '0')
@@ -146,7 +147,10 @@ std::string tostr(double d, int decimals, bool trim_leading_zeroes)
                 {
                     sst << s[k];
                 }
-                for (int k = j; k <= sl; ++k)
+                if (j <= u)
+                    j = u + 1;
+
+                for (int k = j; k < sl; ++k)
                 {
                     sst << s[k];
                 }

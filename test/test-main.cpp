@@ -86,6 +86,24 @@ void test_tostr()
 
     n = 1.01200;
     TEST_ASSERT_EQUAL_STRING("1.012e0", tostr(n).c_str());
+
+    n = 1234.5678;
+    TEST_ASSERT_EQUAL_STRING("1235", tostr(n, 0).c_str());
+
+    n = 1234.5678;
+    TEST_ASSERT_EQUAL_STRING("1234.6", tostr(n, 1).c_str());
+    
+    n = 0.00012345678;
+    TEST_ASSERT_EQUAL_STRING("0", tostr(n, 0).c_str());
+
+    n = 0.00012345678;
+    TEST_ASSERT_EQUAL_STRING("0.0001", tostr(n, 4).c_str());
+
+    n = 0.00012345678;
+    TEST_ASSERT_EQUAL_STRING("0.00012346", tostr(n, 8).c_str());
+    
+    n = -0.00012345678;
+    TEST_ASSERT_EQUAL_STRING("-0.00012346", tostr(n, 8).c_str());
 }
 
 int main()
