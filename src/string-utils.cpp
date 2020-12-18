@@ -122,41 +122,44 @@ std::string tostr(double d, int decimals, bool trim_leading_zeroes)
         if (sl > 0)
         {
             int j = sl - 1;
+            int v = 0;
             while (sciMode && j >= 0)
             {
                 if (s[j] == 'e')
+                {
+                    v = j;
+                    --j;
                     break;
+                }
                 --j;
             }
-            int u = j - (sciMode ? 1 : 0);
-            while (u >= 0)
+
+            //         jv
+            // 1234.5600e9
+            //
+            while (j >= 0 && s[j] == '0')
+                --j;
+
+            int w = j;
+            //       w  v
+            // 1234.5600e9
+            //
+            stringstream sst;
+
+            for (int k = 0; k <= w; ++k) // 1234.56
             {
-                if (s[u] != '0')
-                {
-                    if (s[u] == '.')
-                        --u;
+                if (s[k] == '.' && w == k) // 400.00 => 400. -> 400
                     break;
-                }
-                --u;
+                sst << s[k];
             }
-            if (u != j - 1)
+
+            if (sciMode)
             {
-                stringstream sst;
-
-                for (int k = 0; k <= u; ++k)
-                {
+                for (int k = v; k < sl; ++k) // 1234.56e9
                     sst << s[k];
-                }
-                if (j <= u)
-                    j = u + 1;
-
-                for (int k = j; k < sl; ++k)
-                {
-                    sst << s[k];
-                }
-
-                return sst.str();
             }
+
+            return sst.str();
         }
     }
 

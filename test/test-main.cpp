@@ -104,6 +104,12 @@ void test_tostr()
     
     n = -0.00012345678;
     TEST_ASSERT_EQUAL_STRING("-0.00012346", tostr(n, 8).c_str());
+
+    n = 400;
+    TEST_ASSERT_EQUAL_STRING("400.0", tostr(n, 1, false).c_str());
+
+    n = 400;
+    TEST_ASSERT_EQUAL_STRING("400", tostr(n, 1).c_str());
 }
 
 int main()
