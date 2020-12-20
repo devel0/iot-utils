@@ -1,5 +1,5 @@
-#ifndef _NUMBER_UTILS_H
-#define _NUMBER_UTILS_H
+#ifndef _SEARCHATHING_NUMBER_UTILS_H
+#define _SEARCHATHING_NUMBER_UTILS_H
 
 #include <mbed.h>
 

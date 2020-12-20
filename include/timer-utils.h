@@ -1,5 +1,5 @@
-#ifndef _TIMER_UTILS_H
-#define _TIMER_UTILS_H
+#ifndef _SEARCHATHING_TIMER_UTILS_H
+#define _SEARCHATHING_TIMER_UTILS_H
 
 #include <mbed.h>
 

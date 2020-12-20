@@ -1,5 +1,5 @@
-#ifndef _STRING_UTILS_H
-#define _STRING_UTILS_H
+#ifndef _SEARCHATHING_STRING_UTILS_H
+#define _SEARCHATHING_STRING_UTILS_H
 
 #include <mbed.h>
 

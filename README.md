@@ -7,10 +7,12 @@ Utilities for ststm32 platform, mbed os framework.
 - [extract mantissa, exp base 10][1]
 - [double to string][2]
 - [timer/clock macros][3]
+- [simple linked list][4]
 
 [1]: https://github.com/devel0/iot-utils/blob/d24eb41871fdbacb68edf2786f50ba79ad585a25/include%2Fnumber-utils.h#L12
 [2]: https://github.com/devel0/iot-utils/blob/5fdf781f97cb69752d66480991e3c378ed6a4d17/include%2Fstring-utils.h#L13
 [3]: https://github.com/devel0/iot-utils/blob/df70d728abb43f595fa9493a69e4c563f65e848c/include%2Ftimer-utils.h#L6
+[4]: https://github.com/devel0/iot-utils/blob/1a4a6af2157e699805c98761f147c9bf74a4cc26/include%2Fslist.h#L30
 
 ## Quickstart
 
@@ -28,64 +30,112 @@ If got trouble during compile, remove `.pio/libdeps/nucleo_f446re/iot-utils/libr
 #include <number-utils.h>
 #include <string-utils.h>
 #include <timer-utils.h>
+#include <slist.h>
 
 int main()
 {
     printf("START\n");
 
-    printf("%s\n", tostr(1234.5678901234567, 4).c_str());  // 1234.5679
-    printf("%s\n", tostr(-1234.5678901234567, 4).c_str()); // -1234.5679
+    //
+    // DOUBLE TO STRING
+    //
+    {
+        printf("%s\n", tostr(1234.5678901234567, 4).c_str());  // 1234.5679
+        printf("%s\n", tostr(-1234.5678901234567, 4).c_str()); // -1234.5679
 
-    printf("%s\n", tostr(1234.5678901234567, 10).c_str());  // 1234.5678901235
-    printf("%s\n", tostr(-1234.5678901234567, 10).c_str()); // -1234.5678901235
+        printf("%s\n", tostr(1234.5678901234567, 10).c_str());  // 1234.5678901235
+        printf("%s\n", tostr(-1234.5678901234567, 10).c_str()); // -1234.5678901235
 
-    printf("%s\n", tostr(1234.5678901234567e-8, 6).c_str());  // 0.000012
-    printf("%s\n", tostr(-1234.5678901234567e-8, 6).c_str()); // -0.000012
+        printf("%s\n", tostr(1234.5678901234567e-8, 6).c_str());  // 0.000012
+        printf("%s\n", tostr(-1234.5678901234567e-8, 6).c_str()); // -0.000012
 
-    printf("%s\n", tostr(1234.5678901234567e100, 6).c_str());  // 1.234568e103
-    printf("%s\n", tostr(-1234.5678901234567e100, 6).c_str()); // -1.234568e103
+        printf("%s\n", tostr(1234.5678901234567e100, 6).c_str());  // 1.234568e103
+        printf("%s\n", tostr(-1234.5678901234567e100, 6).c_str()); // -1.234568e103
 
-    printf("%s\n", tostr(1234.5678901234567e-100, 6).c_str());  // 1.234568e-97
-    printf("%s\n", tostr(-1234.5678901234567e-100, 6).c_str()); // -1.234568e-97
+        printf("%s\n", tostr(1234.5678901234567e-100, 6).c_str());  // 1.234568e-97
+        printf("%s\n", tostr(-1234.5678901234567e-100, 6).c_str()); // -1.234568e-97
 
-    printf("%s\n", tostr(1).c_str());              // 1e0
-    printf("%s\n", tostr(1e20).c_str());           // 1e20
-    printf("%s\n", tostr(1e20, 4).c_str());        // 1e20
-    printf("%s\n", tostr(1e20, 4, false).c_str()); // 1.0000e20
-    printf("%s\n", tostr(1, 4, false).c_str());    // 1.0000
-    printf("%s\n", tostr(1.01200).c_str());        // 1.012e0
+        printf("%s\n", tostr(1).c_str());              // 1e0
+        printf("%s\n", tostr(1e20).c_str());           // 1e20
+        printf("%s\n", tostr(1e20, 4).c_str());        // 1e20
+        printf("%s\n", tostr(1e20, 4, false).c_str()); // 1.0000e20
+        printf("%s\n", tostr(1, 4, false).c_str());    // 1.0000
+        printf("%s\n", tostr(1.01200).c_str());        // 1.012e0
 
-    printf("%s\n", tostr(1234.5678, 0, false).c_str());     // 1235
-    printf("%s\n", tostr(1234.5678, 1, false).c_str());     // 1234.6
-    printf("%s\n", tostr(0.00012345678, 0, false).c_str()); // 0
-    printf("%s\n", tostr(0.00012345678, 4, false).c_str()); // 0.0001
-    printf("%s\n", tostr(0.00012345678, 8, false).c_str()); // 0.00012346
+        printf("%s\n", tostr(1234.5678, 0, false).c_str());     // 1235
+        printf("%s\n", tostr(1234.5678, 1, false).c_str());     // 1234.6
+        printf("%s\n", tostr(0.00012345678, 0, false).c_str()); // 0
+        printf("%s\n", tostr(0.00012345678, 4, false).c_str()); // 0.0001
+        printf("%s\n", tostr(0.00012345678, 8, false).c_str()); // 0.00012346
 
-    printf("%s\n", tostr(400, 1, false).c_str()); // 400.0
-    printf("%s\n", tostr(400, 1).c_str());        // 400
+        printf("%s\n", tostr(400, 1, false).c_str()); // 400.0
+        printf("%s\n", tostr(400, 1).c_str());        // 400
+    }
 
-    Timer t;
-    t.start();
-    auto clkStart = clock_now(); // rtos::Kernel::Clock::time_point
+    //
+    // TIMER
+    //
+    {
 
-    ThisThread::sleep_for(1250ms);
+        Timer t;
+        t.start();
+        auto clkStart = clock_now(); // rtos::Kernel::Clock::time_point
 
-    auto tDiff = t.elapsed_time();         // std::chrono::microseconds
-    auto clkDiff = clock_now() - clkStart; // std::chrono::milliseconds
+        ThisThread::sleep_for(1250ms);
 
-    auto clk_s = chrono_s(clkDiff);
-    auto clk_ms = chrono_ms(clkDiff);
-    auto clk_us = chrono_us(clkDiff);
+        auto tDiff = t.elapsed_time();         // std::chrono::microseconds
+        auto clkDiff = clock_now() - clkStart; // std::chrono::milliseconds
 
-    auto t_s = chrono_s(tDiff);
-    auto t_ms = chrono_ms(tDiff);
-    auto t_us = chrono_us(tDiff);
+        auto clk_s = chrono_s(clkDiff);
+        auto clk_ms = chrono_ms(clkDiff);
+        auto clk_us = chrono_us(clkDiff);
 
-    // diff using clock 1 s ; 1250 ms ; 1250000 us
-    printf("diff using clock %llu s ; %llu ms ; %llu us\n", clk_s, clk_ms, clk_us);
+        auto t_s = chrono_s(tDiff);
+        auto t_ms = chrono_ms(tDiff);
+        auto t_us = chrono_us(tDiff);
 
-    // diff using timer 1 s ; 1249 ms ; 1249293 us
-    printf("diff using timer %llu s ; %llu ms ; %llu us\n", t_s, t_ms, t_us);
+        // diff using clock 1 s ; 1250 ms ; 1250000 us
+        printf("diff using clock %llu s ; %llu ms ; %llu us\n", clk_s, clk_ms, clk_us);
+
+        // diff using timer 1 s ; 1249 ms ; 1249293 us
+        printf("diff using timer %llu s ; %llu ms ; %llu us\n", t_s, t_ms, t_us);
+    }
+
+    //
+    // SIMPLE LINKED LIST
+    //
+    {
+        SList<int> lst;
+
+        lst.Add(1);
+        lst.Add(2);
+        lst.Add(3);
+        
+        // lst[0] = 1
+        // lst[1] = 2
+        // lst[2] = 3
+
+        int l = lst.Size();
+        int i = 0;
+
+        while (i < l)
+        {
+            printf("lst[%d] = %d\n", i, lst.Get(i));
+            ++i;
+        }
+
+        // more efficient walking nodes
+
+        auto n = lst.GetNode(0);
+        i = 0;
+        while (n != NULL)
+        {
+            printf("lst[%d] = %d\n", i, n->data);
+
+            ++i;
+            n = n->next;
+        }
+    }
 }
 ```
 
@@ -136,8 +186,9 @@ when started from vscode command palette `PlatformIO: Serial Monitor` (ctrl+alt+
 --- More details at http://bit.ly/pio-monitor-filters
 --- Miniterm on /dev/ttyACM0  9600,8,N,1 ---
 --- Quit: Ctrl+C | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
-test/test-main.cpp:76:test_frexp10:PASS
-test/test-main.cpp:77:test_tostr:PASS
+test/test-main.cpp:157:test_frexp10:PASS
+test/test-main.cpp:158:test_tostr:PASS
+test/test-main.cpp:159:test_slist:PASS
 
 -----------------------
 2 Tests 0 Failures 0 Ignored 
