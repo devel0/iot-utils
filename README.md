@@ -10,7 +10,7 @@ Utilities for ststm32 platform, mbed os framework.
 
 [1]: https://github.com/devel0/iot-utils/blob/d24eb41871fdbacb68edf2786f50ba79ad585a25/include%2Fnumber-utils.h#L12
 [2]: https://github.com/devel0/iot-utils/blob/5fdf781f97cb69752d66480991e3c378ed6a4d17/include%2Fstring-utils.h#L13
-[3]: 
+[3]: https://github.com/devel0/iot-utils/blob/df70d728abb43f595fa9493a69e4c563f65e848c/include%2Ftimer-utils.h#L6
 
 ## Quickstart
 
