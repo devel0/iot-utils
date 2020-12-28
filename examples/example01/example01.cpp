@@ -56,7 +56,7 @@ int main()
         t.start();
         auto clkStart = clock_now(); // rtos::Kernel::Clock::time_point
 
-        ThisThread::sleep_for(1250ms);
+        ThisThread::sleep_for(795ms);
 
         auto tDiff = t.elapsed_time();         // std::chrono::microseconds
         auto clkDiff = clock_now() - clkStart; // std::chrono::milliseconds
@@ -69,11 +69,13 @@ int main()
         auto t_ms = chrono_ms(tDiff);
         auto t_us = chrono_us(tDiff);
 
-        // diff using clock 1 s ; 1250 ms ; 1250000 us
-        printf("diff using clock %llu s ; %llu ms ; %llu us\n", clk_s, clk_ms, clk_us);
+        // diff using clock (double) .795 s ; 795 ms ; 795000 us
+        printf("diff using clock (double) %s s ; %s ms ; %s us\n",
+            tostr(clk_s, 4).c_str(), tostr(clk_ms, 4).c_str(), tostr(clk_us, 4).c_str());
 
-        // diff using timer 1 s ; 1249 ms ; 1249293 us
-        printf("diff using timer %llu s ; %llu ms ; %llu us\n", t_s, t_ms, t_us);
+        // diff using timer (double) .795 s ; 795.033 ms ; 795033 us
+        printf("diff using timer (double) %s s ; %s ms ; %s us\n",
+            tostr(t_s, 4).c_str(), tostr(t_ms, 4).c_str(), tostr(t_us, 4).c_str());
     }
 
     //
@@ -85,7 +87,7 @@ int main()
         lst.Add(1);
         lst.Add(2);
         lst.Add(3);
-        
+
         // lst[0] = 1
         // lst[1] = 2
         // lst[2] = 3
