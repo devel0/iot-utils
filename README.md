@@ -11,7 +11,7 @@ Utilities for ststm32 platform, mbed os framework.
 
 [1]: https://github.com/devel0/iot-utils/blob/d24eb41871fdbacb68edf2786f50ba79ad585a25/include%2Fnumber-utils.h#L12
 [2]: https://github.com/devel0/iot-utils/blob/5fdf781f97cb69752d66480991e3c378ed6a4d17/include%2Fstring-utils.h#L13
-[3]: https://github.com/devel0/iot-utils/blob/df70d728abb43f595fa9493a69e4c563f65e848c/include%2Ftimer-utils.h#L6
+[3]: https://github.com/devel0/iot-utils/blob/d5906d775a021a6ac925ade11db0b7ae57e56f9a/include/timer-utils.h#L7
 [4]: https://github.com/devel0/iot-utils/blob/1a4a6af2157e699805c98761f147c9bf74a4cc26/include%2Fslist.h#L30
 
 ## Quickstart
@@ -81,7 +81,7 @@ int main()
         t.start();
         auto clkStart = clock_now(); // rtos::Kernel::Clock::time_point
 
-        ThisThread::sleep_for(1250ms);
+        ThisThread::sleep_for(795ms);
 
         auto tDiff = t.elapsed_time();         // std::chrono::microseconds
         auto clkDiff = clock_now() - clkStart; // std::chrono::milliseconds
@@ -94,11 +94,13 @@ int main()
         auto t_ms = chrono_ms(tDiff);
         auto t_us = chrono_us(tDiff);
 
-        // diff using clock 1 s ; 1250 ms ; 1250000 us
-        printf("diff using clock %llu s ; %llu ms ; %llu us\n", clk_s, clk_ms, clk_us);
+        // diff using clock (double) .795 s ; 795 ms ; 795000 us
+        printf("diff using clock (double) %s s ; %s ms ; %s us\n",
+            tostr(clk_s, 4).c_str(), tostr(clk_ms, 4).c_str(), tostr(clk_us, 4).c_str());
 
-        // diff using timer 1 s ; 1249 ms ; 1249293 us
-        printf("diff using timer %llu s ; %llu ms ; %llu us\n", t_s, t_ms, t_us);
+        // diff using timer (double) .795 s ; 795.033 ms ; 795033 us
+        printf("diff using timer (double) %s s ; %s ms ; %s us\n",
+            tostr(t_s, 4).c_str(), tostr(t_ms, 4).c_str(), tostr(t_us, 4).c_str());
     }
 
     //
@@ -186,12 +188,13 @@ when started from vscode command palette `PlatformIO: Serial Monitor` (ctrl+alt+
 --- More details at http://bit.ly/pio-monitor-filters
 --- Miniterm on /dev/ttyACM0  9600,8,N,1 ---
 --- Quit: Ctrl+C | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
-test/test-main.cpp:157:test_frexp10:PASS
-test/test-main.cpp:158:test_tostr:PASS
-test/test-main.cpp:159:test_slist:PASS
+test/test-main.cpp:171:test_frexp10     [PASSED]
+test/test-main.cpp:172:test_tostr       [PASSED]
+test/test-main.cpp:173:test_slist       [PASSED]
+test/test-main.cpp:174:test_timer       [PASSED]
 
 -----------------------
-2 Tests 0 Failures 0 Ignored 
+4 Tests 0 Failures 0 Ignored 
 OK
 ```
 
