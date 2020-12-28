@@ -4,6 +4,7 @@
 #include <string-utils.h>
 #include <number-utils.h>
 #include <constant-utils.h>
+#include <timer-utils.h>
 #include <slist.h>
 
 double test_frexp10_helper(double input)
@@ -146,9 +147,22 @@ void test_slist()
     n = l.GetNode(0);
     TEST_ASSERT_EQUAL(1, n->data);
     TEST_ASSERT_NOT_EQUAL(NULL, n->next);
-    n = n->next;    
+    n = n->next;
     TEST_ASSERT_EQUAL(3, n->data);
     TEST_ASSERT_EQUAL(NULL, n->next);
+}
+
+void test_timer()
+{
+    auto t1 = 2150ms;
+
+    auto t_s = chrono_s(t1);
+    auto t_ms = chrono_ms(t1);
+    auto t_us = chrono_us(t1);
+
+    TEST_ASSERT_EQUAL_DOUBLE(2.15, t_s);
+    TEST_ASSERT_EQUAL_DOUBLE(2.15e3, t_ms);
+    TEST_ASSERT_EQUAL_DOUBLE(2.15e6, t_us);
 }
 
 int main()
@@ -157,5 +171,6 @@ int main()
     RUN_TEST(test_frexp10);
     RUN_TEST(test_tostr);
     RUN_TEST(test_slist);
+    RUN_TEST(test_timer);
     UNITY_END();
 }
