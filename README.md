@@ -1,7 +1,15 @@
 # iot-utils
 
 <!-- TOC -->
-any text
+- [iot-utils](#iot-utils)
+  * [Description](#description)
+  * [API](#api)
+  * [Quickstart](#quickstart)
+  * [Examples](#examples)
+    + [double to string](#double-to-string)
+  * [Debugging](#debugging)
+  * [Unit tests](#unit-tests)
+  * [How this project was built](#how-this-project-was-built)
 <!-- TOCEND -->
 
 <hr/>
