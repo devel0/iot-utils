@@ -33,8 +33,8 @@ Utilities for ststm32 platform, mbed os framework.
 - [classes](data/api/index_classes.md)
 - [number-utils](data/api/Files/number-utils_8h.md#file-number-utils.h)
 - [string-utils](data/api/Files/string-utils_8h.md#file-string-utils.h)
-- [timer-utils](data/api/Files/string-utils_8h.md#file-timer-utils.h)
-- [constant-utils](data/api/Files/string-utils_8h.md#file-constant-utils.h)
+- [timer-utils](data/api/Files/timer-utils_8h.md#file-timer-utils.h)
+- [constant-utils](data/api/Files/constant-utils_8h.md#file-constant-utils.h)
 
 ## Quickstart
 
