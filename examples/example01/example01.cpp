@@ -11,6 +11,8 @@ int main()
 {
     printf("START\n");
 
+    return;
+
     //
     // DOUBLE TO STRING
     //

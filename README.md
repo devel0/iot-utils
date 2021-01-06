@@ -1,5 +1,11 @@
 # iot-utils
 
+<!-- TOC -->
+any text
+<!-- TOCEND -->
+
+<hr/>
+
 ## Description
 
 Utilities for ststm32 platform, mbed os framework.
@@ -13,6 +19,14 @@ Utilities for ststm32 platform, mbed os framework.
 [2]: https://github.com/devel0/iot-utils/blob/5fdf781f97cb69752d66480991e3c378ed6a4d17/include%2Fstring-utils.h#L13
 [3]: https://github.com/devel0/iot-utils/blob/d5906d775a021a6ac925ade11db0b7ae57e56f9a/include/timer-utils.h#L7
 [4]: https://github.com/devel0/iot-utils/blob/1a4a6af2157e699805c98761f147c9bf74a4cc26/include%2Fslist.h#L30
+
+## API
+
+- [classes]()
+- [number-utils]()
+- [string-utils]()
+- [timer-utils]()
+- [constant-utils]()
 
 ## Quickstart
 

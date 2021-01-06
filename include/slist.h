@@ -3,29 +3,47 @@
 
 #include <mbed.h>
 
-// Templated simple linked-list node element.
-// Store templated element `T' into a node object that allow to
-// follow using a `next' pointer to the next one in the list.
-// The given template `T' must support default constructor for
-// internal purpose.
+/**
+ * @brief Templated simple linked-list node element.
+ * 
+ * Store templated element `T' into a node object that allow to
+ * follow using a `next' pointer to the next one in the list.
+ * The given template `T' must support default constructor for
+ * internal purpose.
+ * 
+ * @tparam T template of data
+ */
 template <class T>
 class SListNode
 {
 public:
-    // Constructor stores a copy of given element into internal data.
+    /**
+     * @brief Constructor stores a copy of given element into internal data.
+     * 
+     * @param _data data to store
+     */
     SListNode<T>(const T &_data) { data = _data; }
 
-    // Element data.
+    /**
+     * @brief Element data.     
+     */
     T data;
 
-    // Pointer to the next node in simple linked list.
+    /**
+     * @brief Pointer to the next node in simple linked list.     
+     */
     SListNode<T> *next = NULL;
 };
 
-// Templated simple linked-list.
-// Store templated element `T' into a simple linked list.
-// The given template `T' must support default constructor for
-// internal purpose.
+/**
+ * @brief Templated simple linked-list.
+ * 
+ * Store templated element `T' into a simple linked list.
+ * The given template `T' must support default constructor for
+ * internal purpose.
+ * 
+ * @tparam T template of data
+ */
 template <class T>
 class SList
 {
@@ -34,18 +52,31 @@ class SList
     SListNode<T> *last = NULL;
 
 public:
-    // Default constructor.
+    /**
+     * @brief Default constructor.     
+     */
     SList()
     {
     }
 
-    // Copy constructor.
+    /**
+     * @brief Copy constructor.
+     * 
+     * @param other list to copy data from
+     */
     SList(const SList &other)
     {
         *this = other;
     }
 
-    // Assign operator. Creates a copy of the given `other' list.
+    /**
+     * @brief Assign operator.
+     * 
+     * Creates a copy of the given `other' list.
+     * 
+     * @param other other list to copy data from
+     * @return SList& new list with data copied from given other
+     */
     SList &operator=(const SList &other)
     {
         Clear();
@@ -61,26 +92,38 @@ public:
         return *this;
     }
 
-    // Destructor. Deallocates memory used for nodes and thus calls
-    // destructor of stored templated objects.
+    /**
+     * @brief Destructor.
+     * 
+     * Deallocates memory used for nodes and thus calls destructor of stored templated objects.     
+     */
     ~SList()
     {
         Clear();
     }
 
-    // Current list size.
+    /**
+     * @brief Current list size.
+     * 
+     * @return uint16_t 
+     */
     uint16_t Size() const { return size; }
 
-    // Adds given templated object `data' to the list.
-    // If DEBUG and DEBUG_ASSERT are enabled a report about out-of-
-    // memory will be reported if unable to allocate more nodes.
+    /**
+     * @brief Adds given templated object `data' to the list.
+     * 
+     * If DEBUG enabled a report about out-of-memory will be reported if unable to allocate more nodes.
+     * 
+     * @param data item data to add
+     * @return T& reference to item data
+     */
     T &Add(const T &data)
     {
         auto node = new SListNode<T>(data);
         if (node == NULL)
         {
 #if defined DEBUG
-                printf("* Fatal: SList alloc of node out of memory\n"));
+            printf("* Fatal: SList alloc of node out of memory\n"));
 #endif
         }
         if (first == NULL)
@@ -95,8 +138,9 @@ public:
         return node->data;
     }
 
-    // Clear the list destroying each nodes thus calling the
-    // destructor of contained templated data objects.
+    /**
+     * @brief Clear the list destroying each nodes thus calling the destructor of contained templated data objects.     
+     */
     void Clear()
     {
         if (first == NULL)
@@ -113,8 +157,13 @@ public:
         first = last = NULL;
     }
 
-    // Remove the node by idx ( 0 is the first ).
-    // It does nothing if invalid index out of bounds.
+    /**
+     * @brief Remove the node by idx ( 0 is the first ).
+     * 
+     * It does nothing if invalid index out of bounds.
+     * 
+     * @param idx index of item to remove (0 is the first)
+     */
     void Remove(uint16_t idx)
     {
         if (idx >= size)
@@ -146,16 +195,27 @@ public:
         --size;
     }
 
-    // Retrieve a reference of the template object at the given `idx'
-    // in the node list. Note: don't use `auto' pointer of the
-    // returned object will be copied instead of referenced.
+    /**
+     * @brief Retrieve a reference of the template object at the given `idx' in the node list.
+     * 
+     * Note: don't use `auto' pointer of the returned object will be copied instead of referenced.
+     * 
+     * @param idx index of element to retrieve (0 is the first)
+     * @return T& template data of i-th item
+     */
     T &Get(int idx) const
     {
         return GetNode(idx)->data;
     }
 
-    // Retrieve a pointer to the node at the given `idx'
-    // ( 0 is start ). If an invalid index was given returns NULL.
+    /**
+     * @brief Retrieve a pointer to the node at the given `idx' ( 0 is start ).
+     * 
+     * If an invalid index was given returns NULL.
+     * 
+     * @param idx index of element node to retrieve (0 is the first)
+     * @return SListNode<T>* pointer to i-th item in the list ( NULL if invalid index )
+     */
     SListNode<T> *GetNode(int idx) const
     {
         if (idx == size - 1)

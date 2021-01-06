@@ -1,7 +1,14 @@
 #ifndef _SEARCHATHING_CONSTANTS_UTILS_H
 #define _SEARCHATHING_CONSTANTS_UTILS_H
 
+/**
+ * @brief pi-greco 
+ */
 #define PI 3.1415926535897932384626433832795
+
+/**
+ * @brief nepero number 
+ */
 #define E 2.718281828459045235360287471352
 
 #endif
