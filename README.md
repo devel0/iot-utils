@@ -18,19 +18,10 @@
 
 Utilities for ststm32 platform, mbed os framework.
 
-- [extract mantissa, exp base 10][1]
-- [double to string][2]
-- [timer/clock macros][3]
-- [simple linked list][4]
-
-[1]: https://github.com/devel0/iot-utils/blob/d24eb41871fdbacb68edf2786f50ba79ad585a25/include%2Fnumber-utils.h#L12
-[2]: https://github.com/devel0/iot-utils/blob/5fdf781f97cb69752d66480991e3c378ed6a4d17/include%2Fstring-utils.h#L13
-[3]: https://github.com/devel0/iot-utils/blob/d5906d775a021a6ac925ade11db0b7ae57e56f9a/include/timer-utils.h#L7
-[4]: https://github.com/devel0/iot-utils/blob/1a4a6af2157e699805c98761f147c9bf74a4cc26/include%2Fslist.h#L30
-
 ## API
 
 - [classes](data/api/index_classes.md)
+    - simple linked list
 - [number-utils](data/api/Files/number-utils_8h.md#file-number-utils.h)
 - [string-utils](data/api/Files/string-utils_8h.md#file-string-utils.h)
 - [timer-utils](data/api/Files/timer-utils_8h.md#file-timer-utils.h)
