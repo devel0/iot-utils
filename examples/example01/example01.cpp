@@ -9,14 +9,16 @@
 
 int main()
 {
-    printf("START\n");
-
-    return;
+    printf("START\n");    
 
     //
     // DOUBLE TO STRING
     //
-    {
+    {        
+        printf("%s\n", tostr(1, 4, false).c_str());    // 1.0000
+        printf("%s\n", tostr(0, 2).c_str());           // 0        
+        printf("%s\n", tostr(0, 2, false).c_str());    // 0.00        
+
         printf("%s\n", tostr(1234.5678901234567, 4).c_str());  // 1234.5679
         printf("%s\n", tostr(-1234.5678901234567, 4).c_str()); // -1234.5679
 
@@ -46,7 +48,7 @@ int main()
         printf("%s\n", tostr(0.00012345678, 8, false).c_str()); // 0.00012346
 
         printf("%s\n", tostr(400, 1, false).c_str()); // 400.0
-        printf("%s\n", tostr(400, 1).c_str());        // 400
+        printf("%s\n", tostr(400, 1).c_str());        // 400        
     }
 
     //

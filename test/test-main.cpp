@@ -112,6 +112,13 @@ void test_tostr()
 
     n = 400;
     TEST_ASSERT_EQUAL_STRING("400", tostr(n, 1).c_str());
+
+    n = 0;
+    TEST_ASSERT_EQUAL_STRING("0", tostr(n, 2).c_str());
+
+    n = 0;
+    TEST_ASSERT_EQUAL_STRING("0.00", tostr(n, 2, false).c_str());
+
 }
 
 void test_slist()

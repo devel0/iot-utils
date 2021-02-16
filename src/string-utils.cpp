@@ -6,6 +6,22 @@
 std::string tostr(double d, int decimals, bool trim_leading_zeroes)
 {
     stringstream ss;
+    if (d == 0)
+    {
+        if (decimals < 0)
+            return string("0e0");
+
+        ss << '0';
+
+        if (decimals > 0)
+        {
+            ss << '.';
+            while (decimals--)
+                ss << '0';
+        }
+
+        return ss.str();
+    }
 
     // provide rounding
     int b10exp = 0;
