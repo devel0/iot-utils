@@ -13,7 +13,7 @@ std::string tostr(double d, int decimals, bool trim_leading_zeroes)
 
         ss << '0';
 
-        if (decimals > 0)
+        if (decimals > 0 && !trim_leading_zeroes)
         {
             ss << '.';
             while (decimals--)
