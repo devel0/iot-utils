@@ -99,7 +99,7 @@ public:
         if (node == NULL)
         {
 #if defined DEBUG
-            printf("* Fatal: SList alloc of node out of memory\n"));
+            printf("* Fatal: SList alloc of node out of memory\n");
 #endif
         }
         if (first == NULL)
