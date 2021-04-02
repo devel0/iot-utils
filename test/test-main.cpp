@@ -1,4 +1,4 @@
-#include <mbed.h>
+//#include <mbed.h>
 #include <unity.h>
 
 #include <string-utils.h>
@@ -6,6 +6,8 @@
 #include <constant-utils.h>
 #include <timer-utils.h>
 #include <slist.h>
+
+using namespace std;
 
 double test_frexp10_helper(double input)
 {
@@ -118,7 +120,6 @@ void test_tostr()
 
     n = 0;
     TEST_ASSERT_EQUAL_STRING("0.00", tostr(n, 2, false).c_str());
-
 }
 
 void test_slist()
@@ -159,6 +160,7 @@ void test_slist()
     TEST_ASSERT_EQUAL(NULL, n->next);
 }
 
+#ifdef __MBED__
 void test_timer()
 {
     auto t1 = 2150ms;
@@ -171,13 +173,24 @@ void test_timer()
     TEST_ASSERT_EQUAL_DOUBLE(2.15e3, t_ms);
     TEST_ASSERT_EQUAL_DOUBLE(2.15e6, t_us);
 }
+#endif
 
+#ifdef ARDUINO
+void setup()
+#else
 int main()
+#endif
 {
     UNITY_BEGIN();
     RUN_TEST(test_frexp10);
     RUN_TEST(test_tostr);
     RUN_TEST(test_slist);
+#ifdef __MBED__
     RUN_TEST(test_timer);
+#endif
     UNITY_END();
 }
+
+#ifdef ARDUINO
+void loop() {}
+#endif

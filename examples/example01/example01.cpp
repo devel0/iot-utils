@@ -1,23 +1,25 @@
 #ifndef UNIT_TEST
 
-#include <mbed.h>
-
 #include <number-utils.h>
 #include <string-utils.h>
 #include <timer-utils.h>
 #include <slist.h>
 
+#if defined(ARDUINO)
+void setup()
+#else
 int main()
+#endif
 {
-    printf("START\n");    
+    printf("START\n");
 
     //
     // DOUBLE TO STRING
     //
-    {        
-        printf("%s\n", tostr(1, 4, false).c_str());    // 1.0000
-        printf("%s\n", tostr(0, 2).c_str());           // 0        
-        printf("%s\n", tostr(0, 2, false).c_str());    // 0.00        
+    {
+        printf("%s\n", tostr(1, 4, false).c_str()); // 1.0000
+        printf("%s\n", tostr(0, 2).c_str());        // 0
+        printf("%s\n", tostr(0, 2, false).c_str()); // 0.00
 
         printf("%s\n", tostr(1234.5678901234567, 4).c_str());  // 1234.5679
         printf("%s\n", tostr(-1234.5678901234567, 4).c_str()); // -1234.5679
@@ -48,12 +50,13 @@ int main()
         printf("%s\n", tostr(0.00012345678, 8, false).c_str()); // 0.00012346
 
         printf("%s\n", tostr(400, 1, false).c_str()); // 400.0
-        printf("%s\n", tostr(400, 1).c_str());        // 400        
+        printf("%s\n", tostr(400, 1).c_str());        // 400
     }
 
-    //
-    // TIMER
-    //
+//
+// TIMER
+//
+#ifdef __MBED__
     {
 
         Timer t;
@@ -75,12 +78,13 @@ int main()
 
         // diff using clock (double) .795 s ; 795 ms ; 795000 us
         printf("diff using clock (double) %s s ; %s ms ; %s us\n",
-            tostr(clk_s, 4).c_str(), tostr(clk_ms, 4).c_str(), tostr(clk_us, 4).c_str());
+               tostr(clk_s, 4).c_str(), tostr(clk_ms, 4).c_str(), tostr(clk_us, 4).c_str());
 
         // diff using timer (double) .795 s ; 795.033 ms ; 795033 us
         printf("diff using timer (double) %s s ; %s ms ; %s us\n",
-            tostr(t_s, 4).c_str(), tostr(t_ms, 4).c_str(), tostr(t_us, 4).c_str());
+               tostr(t_s, 4).c_str(), tostr(t_ms, 4).c_str(), tostr(t_us, 4).c_str());
     }
+#endif
 
     //
     // SIMPLE LINKED LIST
@@ -118,5 +122,11 @@ int main()
         }
     }
 }
+
+#if defined(ARDUINO)
+void loop()
+{
+}
+#endif
 
 #endif

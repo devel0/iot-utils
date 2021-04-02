@@ -3,7 +3,9 @@
 #include "string-utils.h"
 #include "number-utils.h"
 
-std::string tostr(double d, int decimals, bool trim_leading_zeroes)
+using namespace std;
+
+string tostr(double d, int decimals, bool trim_leading_zeroes)
 {
     stringstream ss;
     if (d == 0)

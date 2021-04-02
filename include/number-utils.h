@@ -1,7 +1,13 @@
 #ifndef _SEARCHATHING_NUMBER_UTILS_H
 #define _SEARCHATHING_NUMBER_UTILS_H
 
+#ifdef ARDUINO
+#include <Arduino.h>
+#endif
+
+#ifdef __MBED__
 #include <mbed.h>
+#endif
 
 /**
  * @brief compute mantissa and exp base10

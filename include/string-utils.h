@@ -1,7 +1,15 @@
 #ifndef _SEARCHATHING_STRING_UTILS_H
 #define _SEARCHATHING_STRING_UTILS_H
 
+#ifdef ARDUINO
+#include <Arduino.h>
+#endif
+
+#ifdef __MBED__
 #include <mbed.h>
+#endif
+
+using namespace std;
 
 /**
  * @brief convert given double to string
@@ -11,6 +19,6 @@
  * @param trim_leading_zeroes trim_leading_zeroes if true autoremove decimals ending zeroes
  * @return std::string representation of given value
  */
-std::string tostr(double d, int decimals = -17, bool trim_leading_zeroes = true);
+string tostr(double d, int decimals = -16, bool trim_leading_zeroes = true);
 
 #endif

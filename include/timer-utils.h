@@ -1,7 +1,13 @@
 #ifndef _SEARCHATHING_TIMER_UTILS_H
 #define _SEARCHATHING_TIMER_UTILS_H
 
+#ifdef ARDUINO
+#include <Arduino.h>
+#endif
+
+#ifdef __MBED__
 #include <mbed.h>
+#endif
 
 /**
  * @brief retrieve (double) seconds from given chrono representation
