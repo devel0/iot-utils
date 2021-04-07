@@ -31,8 +31,6 @@ Utilities for ststm32 platform, mbed os framework.
 
 Install using vscode command palette `PlatformIO: New Terminal` referring to [platformio registry](https://platformio.org/lib/show/11564/iot-utils/installation) cli mode doc.
 
-If got trouble during compile, remove `.pio/libdeps/nucleo_f446re/iot-utils/library.json`.
-
 ## Examples
 
 ### double to string
