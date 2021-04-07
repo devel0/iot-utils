@@ -30,8 +30,7 @@
     "export": {
         "exclude":
         [
-            "src/debug-main.cpp",
-            "library.json"
+            "src/debug-main.cpp"
         ]
     }
 }
