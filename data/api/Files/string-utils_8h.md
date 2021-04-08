@@ -12,6 +12,11 @@ title: include/string-utils.h
 
 
 
+## Namespaces
+
+| Name           |
+| -------------- |
+| **[std](https://github.com/devel0/iot-utils/tree/main/data/api/Namespaces/namespacestd.md)**  |
 
 
 
@@ -21,7 +26,7 @@ title: include/string-utils.h
 
 |                | Name           |
 | -------------- | -------------- |
-| std::string | **[tostr](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-tostr)**(double d, int decimals =-17, bool trim_leading_zeroes =true) <br>convert given double to string  |
+| string | **[tostr](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-tostr)**(double d, int decimals =-16, bool trim_leading_zeroes =true) <br>convert given double to string  |
 
 
 
@@ -35,9 +40,9 @@ title: include/string-utils.h
 ### function tostr
 
 ```cpp
-std::string tostr(
+string tostr(
     double d,
-    int decimals =-17,
+    int decimals =-16,
     bool trim_leading_zeroes =true
 )
 ```
@@ -88,9 +93,17 @@ convert given double to string
 #ifndef _SEARCHATHING_STRING_UTILS_H
 #define _SEARCHATHING_STRING_UTILS_H
 
-#include <mbed.h>
+#ifdef ARDUINO
+#include <Arduino.h>
+#endif
 
-std::string tostr(double d, int decimals = -17, bool trim_leading_zeroes = true);
+#ifdef __MBED__
+#include <mbed.h>
+#endif
+
+using namespace std;
+
+string tostr(double d, int decimals = -16, bool trim_leading_zeroes = true);
 
 #endif
 ```
@@ -98,4 +111,4 @@ std::string tostr(double d, int decimals = -17, bool trim_leading_zeroes = true)
 
 -------------------------------
 
-Updated on  6 January 2021 at 13:20:24 CET
+Updated on  8 April 2021 at 19:09:26 CEST

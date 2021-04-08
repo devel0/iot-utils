@@ -193,7 +193,13 @@ retrieve current kernel time_point ( diff between will generate std::chrono::mil
 #ifndef _SEARCHATHING_TIMER_UTILS_H
 #define _SEARCHATHING_TIMER_UTILS_H
 
+#ifdef ARDUINO
+#include <Arduino.h>
+#endif
+
+#ifdef __MBED__
 #include <mbed.h>
+#endif
 
 #define chrono_s(x) std::chrono::duration<double>(x).count()
 
@@ -209,4 +215,4 @@ retrieve current kernel time_point ( diff between will generate std::chrono::mil
 
 -------------------------------
 
-Updated on  6 January 2021 at 13:20:24 CET
+Updated on  8 April 2021 at 19:09:26 CEST

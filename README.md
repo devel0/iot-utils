@@ -26,6 +26,7 @@ Utilities for ststm32 platform, mbed os framework.
 - [string-utils](data/api/Files/string-utils_8h.md#file-string-utils.h)
 - [timer-utils](data/api/Files/timer-utils_8h.md#file-timer-utils.h)
 - [constant-utils](data/api/Files/constant-utils_8h.md#file-constant-utils.h)
+- [vector-utils](data/api/Files/vector-utils_8h.md#file-vector-utils.h)
 
 ## Quickstart
 
@@ -46,6 +47,20 @@ Install using vscode command palette `PlatformIO: New Terminal` referring to [pl
 int main()
 {
     printf("START\n");
+
+    // v (size=6) : {1.2, 3.4, 5.6, 7.8, 9.10, 11.12}
+    {
+        vector<double> v;
+        FoldPushBack(v, 1.2, 3.4, 5.6, 7.8);
+        FoldPushBack(v, 9.10, 11.12);
+
+        printf("v (size=%d) : {", v.size());
+        for (int i = 0; i < v.size(); ++i)
+        {
+            printf("%s%s", i > 0 ? ", " : "", tostr(v[i], 2).c_str());
+        }
+        printf("}\n");
+    }
 
     //
     // DOUBLE TO STRING

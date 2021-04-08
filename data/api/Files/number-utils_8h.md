@@ -86,7 +86,13 @@ compute mantissa and exp base10
 #ifndef _SEARCHATHING_NUMBER_UTILS_H
 #define _SEARCHATHING_NUMBER_UTILS_H
 
+#ifdef ARDUINO
+#include <Arduino.h>
+#endif
+
+#ifdef __MBED__
 #include <mbed.h>
+#endif
 
 int64_t frexp10(double d, int *expb10);
 
@@ -96,4 +102,4 @@ int64_t frexp10(double d, int *expb10);
 
 -------------------------------
 
-Updated on  6 January 2021 at 13:20:24 CET
+Updated on  8 April 2021 at 19:09:26 CEST

@@ -225,4 +225,4 @@ Pointer to the next node in simple linked list.
 
 -------------------------------
 
-Updated on  6 January 2021 at 13:20:24 CET
+Updated on  8 April 2021 at 19:09:26 CEST
