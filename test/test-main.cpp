@@ -6,6 +6,7 @@
 #include <constant-utils.h>
 #include <timer-utils.h>
 #include <slist.h>
+#include <vector-utils.h>
 
 using namespace std;
 
@@ -175,6 +176,22 @@ void test_timer()
 }
 #endif
 
+void test_vector()
+{
+    vector<double> v;
+    FoldPushBack(v, 1.2, 3.4, 5.6, 7.8);
+    FoldPushBack(v, 9.10, 11.12);
+
+    TEST_ASSERT_EQUAL(v.size(), 6);
+
+    TEST_ASSERT_EQUAL_DOUBLE(v[0], 1.2);
+    TEST_ASSERT_EQUAL_DOUBLE(v[0], 3.4);
+    TEST_ASSERT_EQUAL_DOUBLE(v[0], 5.6);
+    TEST_ASSERT_EQUAL_DOUBLE(v[0], 7.8);
+    TEST_ASSERT_EQUAL_DOUBLE(v[0], 9.10);
+    TEST_ASSERT_EQUAL_DOUBLE(v[0], 11.12);
+}
+
 #ifdef ARDUINO
 void setup()
 #else
@@ -188,9 +205,12 @@ int main()
 #ifdef __MBED__
     RUN_TEST(test_timer);
 #endif
+    RUN_TEST(test_vector);
     UNITY_END();
 }
 
 #ifdef ARDUINO
-void loop() {}
+void loop()
+{
+}
 #endif

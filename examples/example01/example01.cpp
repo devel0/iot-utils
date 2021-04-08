@@ -4,6 +4,7 @@
 #include <string-utils.h>
 #include <timer-utils.h>
 #include <slist.h>
+#include <vector-utils.h>
 
 #if defined(ARDUINO)
 void setup()
@@ -13,6 +14,20 @@ int main()
 {
     printf("START\n");
 
+    // v (size=6) : {1.2, 3.4, 5.6, 7.8, 9.10, 11.12}
+    {
+        vector<double> v;
+        FoldPushBack(v, 1.2, 3.4, 5.6, 7.8);
+        FoldPushBack(v, 9.10, 11.12);
+
+        printf("v (size=%d) : {", v.size());
+        for (int i = 0; i < v.size(); ++i)
+        {
+            printf("%s%s", i > 0 ? ", " : "", tostr(v[i], 2).c_str());
+        }
+        printf("}\n");
+    }
+    
     //
     // DOUBLE TO STRING
     //
