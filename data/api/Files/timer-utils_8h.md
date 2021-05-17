@@ -79,7 +79,7 @@ retrieve (double) seconds from given chrono representation
 ```cpp
 #define chrono_ms(
     x
-) (chrono_s(x) * 1e3)
+) ([chrono_s](https://github.com/devel0/iot-utils/tree/main/data/api/Files/timer-utils_8h.md#define-chrono_s)(x) * 1e3)
 ```
 
 retrieve (double) milliseconds from given chrono representation 
@@ -116,7 +116,7 @@ retrieve (double) milliseconds from given chrono representation
 ```cpp
 #define chrono_us(
     x
-) (chrono_s(x) * 1e6)
+) ([chrono_s](https://github.com/devel0/iot-utils/tree/main/data/api/Files/timer-utils_8h.md#define-chrono_s)(x) * 1e6)
 ```
 
 retrieve (double) microseconds from given chrono representation 
@@ -215,4 +215,4 @@ retrieve current kernel time_point ( diff between will generate std::chrono::mil
 
 -------------------------------
 
-Updated on 17 May 2021 at 20:39:28 CEST
+Updated on 17 May 2021 at 21:02:57 CEST

@@ -13,6 +13,11 @@ title: include/lcd-rotary-menu.h
 
 
 
+## Classes
+
+|                | Name           |
+| -------------- | -------------- |
+| class | **[LCDRotaryMenu](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md)** <br>LCD Rotary Menu.  |
 
 
 
@@ -96,4 +101,4 @@ public:
 
 -------------------------------
 
-Updated on 17 May 2021 at 20:39:28 CEST
+Updated on 17 May 2021 at 21:02:57 CEST

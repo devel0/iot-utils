@@ -12,11 +12,6 @@ title: include/string-utils.h
 
 
 
-## Namespaces
-
-| Name           |
-| -------------- |
-| **[std](https://github.com/devel0/iot-utils/tree/main/data/api/Namespaces/namespacestd.md)**  |
 
 
 
@@ -111,4 +106,4 @@ string tostr(double d, int decimals = -16, bool trim_leading_zeroes = true);
 
 -------------------------------
 
-Updated on 17 May 2021 at 20:39:28 CEST
+Updated on 17 May 2021 at 21:02:57 CEST

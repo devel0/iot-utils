@@ -11,6 +11,12 @@
 #include "debounced-rotary.h"
 #include "lcd-rotary-menuitem.h"
 
+/**
+ * @brief LCD Rotary Menu
+ * 
+ * nfo
+ * 
+ */
 class LCDRotaryMenu
 {
     friend class LCDRotaryMenuItem;
