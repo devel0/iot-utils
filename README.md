@@ -1,15 +1,15 @@
 # iot-utils
 
 <!-- TOC -->
-- [iot-utils](#iot-utils)
-  * [Description](#description)
-  * [API](#api)
-  * [Quickstart](#quickstart)
-  * [Examples](#examples)
-    + [double to string](#double-to-string)
-  * [Debugging](#debugging)
-  * [Unit tests](#unit-tests)
-  * [How this project was built](#how-this-project-was-built)
+* [Description](#description)
+* [API](#api)
+* [Quickstart](#quickstart)
+* [Examples](#examples)
+  + [lcd rotary menu](#lcd-rotary-menu)
+  + [double to string](#double-to-string)
+* [Debugging](#debugging)
+* [Unit tests](#unit-tests)
+* [How this project was built](#how-this-project-was-built)
 <!-- TOCEND -->
 
 <hr/>
