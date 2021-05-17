@@ -1,6 +1,6 @@
 {
     "name": "iot-utils",
-    "version": "0.10.0",
+    "version": "1.0.0",
     "description": "Utilities for ststm32 framework and mbed, arduino platforms.",
     "keywords": "util,string,double",
     "authors": {
@@ -9,10 +9,11 @@
     },
     "license": "MIT",
     "frameworks": [
-        "mbed", "arduino"
+        "mbed",
+        "arduino"
     ],
     "platforms": [
-        "ststm32"        
+        "ststm32"
     ],
     "repository": {
         "type": "git",
@@ -22,14 +23,20 @@
         {
             "name": "example01",
             "base": "examples/example01",
-            "files": [                
+            "files": [
                 "example01.cpp"
+            ]
+        },
+        {
+            "name": "example02",
+            "base": "examples/example02",
+            "files": [
+                "example02.cpp"
             ]
         }
     ],
     "export": {
-        "exclude":
-        [
+        "exclude": [
             "src/debug-main.cpp"
         ]
     }
