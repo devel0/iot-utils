@@ -51,6 +51,8 @@ class LCDRotaryMenuItem
      */
     void (*selectCb2)() = NULL;    
 
+    bool isBack = false;
+
 public:
     ~LCDRotaryMenuItem();
 

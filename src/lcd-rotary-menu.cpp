@@ -11,7 +11,7 @@ using namespace std;
 
 LCDRotaryMenu::LCDRotaryMenu(int addr, int cols, int rows, int rotAPin, int rotBPin, int rotSWPin, bool inverted,
                              int btnDebounceMs, int abDebounceUs)
-{
+{    
     this->cols = cols;
     this->rows = rows;
     lcd = new LiquidCrystal_I2C(addr, cols, rows);
@@ -24,6 +24,7 @@ LCDRotaryMenu::LCDRotaryMenu(int addr, int cols, int rows, int rotAPin, int rotB
     invalidated = true;
 
     options.subMenuPostChar = '>';
+    options.backString = "..";
 
     customLineRow = -1;
     rowsBuf = new char *[rows];
@@ -122,7 +123,7 @@ void LCDRotaryMenu::displayMenu()
                 auto item = menuItems[parent->scrollRowPos + r - (r >= customLineRow ? customLineCount : 0)];
                 if (item == selectedItem)
                 {
-                    rowsBuf2[r][0] = '>';
+                    rowsBuf2[r][0] = item->isBack ? '<' : '>';
                     rowsBuf2[r][1] = 0;
                 }
                 else

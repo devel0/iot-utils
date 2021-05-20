@@ -37,7 +37,8 @@ LCDRotaryMenuItem &LCDRotaryMenuItem::append(string menuText)
     if (this != menu.root && children.size() == 0)
     {
         auto backMenuItem = new LCDRotaryMenuItem(menu, this);
-        backMenuItem->setText("..");
+        backMenuItem->setText(menu.options.backString);
+        backMenuItem->isBack = true;
         backMenuItem->onSelect(goBack);
         children.push_back(backMenuItem);
     }
