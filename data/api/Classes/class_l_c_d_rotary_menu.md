@@ -38,6 +38,8 @@ LCD Rotary Menu.  [More...](#detailed-description)
 | void | **[init](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-init)**()  |
 | void | **[loop](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-loop)**()  |
 | [LCDRotaryMenuItem](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md) & | **[getRoot](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-getroot)**()  |
+| void | **[setCustomLine](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-setcustomline)**(const char * customLine, short rowIdx)  |
+| void | **[unsetCustomLine](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-unsetcustomline)**()  |
 
 ## Protected Functions
 
@@ -49,6 +51,11 @@ LCD Rotary Menu.  [More...](#detailed-description)
 
 
 
+## Public Attributes
+
+|                | Name           |
+| -------------- | -------------- |
+| [LCDRotaryMenuOptions](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/struct_l_c_d_rotary_menu_options.md) | **[options](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#variable-options)**  |
 
 
 ## Friends
@@ -344,6 +351,77 @@ LCDRotaryMenuItem & getRoot()
 
 
 
+### function setCustomLine
+
+```cpp
+void setCustomLine(
+    const char * customLine,
+    short rowIdx
+)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### function unsetCustomLine
+
+```cpp
+void unsetCustomLine()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Protected Functions Documentation
 
@@ -454,6 +532,42 @@ void move(
 
 
 
+## Public Attributes Documentation
+
+### variable options
+
+```cpp
+LCDRotaryMenuOptions options;
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Friends
@@ -496,4 +610,4 @@ friend class LCDRotaryMenuItem;
 
 -------------------------------
 
-Updated on 17 May 2021 at 21:02:57 CEST
+Updated on 20 May 2021 at 12:04:49 CEST

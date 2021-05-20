@@ -17,6 +17,7 @@ title: include/lcd-rotary-menu.h
 
 |                | Name           |
 | -------------- | -------------- |
+| struct | **[LCDRotaryMenuOptions](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/struct_l_c_d_rotary_menu_options.md)**  |
 | class | **[LCDRotaryMenu](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md)** <br>LCD Rotary Menu.  |
 
 
@@ -50,9 +51,14 @@ title: include/lcd-rotary-menu.h
 #include "debounced-rotary.h"
 #include "lcd-rotary-menuitem.h"
 
+struct LCDRotaryMenuOptions
+{
+    char subMenuPostChar;
+};
+
 class LCDRotaryMenu
 {
-    friend class LCDRotaryMenuItem;
+    friend class LCDRotaryMenuItem;    
 
     int cols;
     int rows;
@@ -74,6 +80,10 @@ class LCDRotaryMenu
     LCDRotaryMenuItem *root;
     LCDRotaryMenuItem *selectedItem;
     bool invalidated;
+    
+    char **rowsBuf;
+    char **rowsBuf2;
+    short customLineRow;
 
 protected:
     void displayMenu();
@@ -83,14 +93,19 @@ protected:
 public:
     LCDRotaryMenu(int addr, int cols, int rows, int rotAPin, int rotBPin, int rotSWPin, bool inverted = false,
                   int btnDebounceMs = 50, int abDebounceUs = 1500);
-    ~LCDRotaryMenu();
+    ~LCDRotaryMenu();    
+
+    LCDRotaryMenuOptions options;
 
     void setSplashCb(void (*splCb)(LiquidCrystal_I2C &lcd), uint32_t timeoutMs);
 
     void init();
-    void loop();
+    void loop();    
 
     LCDRotaryMenuItem &getRoot();
+
+    void setCustomLine(const char *customLine, short rowIdx);
+    void unsetCustomLine();
 };
 
 #endif
@@ -101,4 +116,4 @@ public:
 
 -------------------------------
 
-Updated on 17 May 2021 at 21:02:57 CEST
+Updated on 20 May 2021 at 12:04:49 CEST
