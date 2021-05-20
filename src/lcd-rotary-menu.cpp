@@ -11,7 +11,7 @@ using namespace std;
 
 LCDRotaryMenu::LCDRotaryMenu(int addr, int cols, int rows, int rotAPin, int rotBPin, int rotSWPin, bool inverted,
                              int btnDebounceMs, int abDebounceUs)
-{    
+{
     this->cols = cols;
     this->rows = rows;
     lcd = new LiquidCrystal_I2C(addr, cols, rows);
@@ -316,9 +316,12 @@ void LCDRotaryMenu::setCustomLine(const char *customLine, short rowIdx)
 
 void LCDRotaryMenu::unsetCustomLine()
 {
-    customLineRow = -1;
+    if (customLineRow != -1)
+    {
+        customLineRow = -1;
 
-    invalidate();
+        invalidate();
+    }
 }
 
 #endif
