@@ -11,6 +11,15 @@
 #include "debounced-rotary.h"
 #include "lcd-rotary-menuitem.h"
 
+struct LCDRotaryMenuOptions
+{
+    /**
+     * @brief if not space then the char is appended at end of menu text to inform the user that the selected item is a submenu item
+     * 
+     */
+    char subMenuPostChar;
+};
+
 /**
  * @brief LCD Rotary Menu
  * 
@@ -19,7 +28,7 @@
  */
 class LCDRotaryMenu
 {
-    friend class LCDRotaryMenuItem;
+    friend class LCDRotaryMenuItem;    
 
     int cols;
     int rows;
@@ -41,6 +50,10 @@ class LCDRotaryMenu
     LCDRotaryMenuItem *root;
     LCDRotaryMenuItem *selectedItem;
     bool invalidated;
+    
+    char **rowsBuf;
+    char **rowsBuf2;
+    short customLineRow;
 
 protected:
     void displayMenu();
@@ -63,7 +76,9 @@ public:
      */
     LCDRotaryMenu(int addr, int cols, int rows, int rotAPin, int rotBPin, int rotSWPin, bool inverted = false,
                   int btnDebounceMs = 50, int abDebounceUs = 1500);
-    ~LCDRotaryMenu();
+    ~LCDRotaryMenu();    
+
+    LCDRotaryMenuOptions options;
 
     /**
      * @brief Set splash callback before Init
@@ -74,9 +89,12 @@ public:
     void setSplashCb(void (*splCb)(LiquidCrystal_I2C &lcd), uint32_t timeoutMs);
 
     void init();
-    void loop();
+    void loop();    
 
     LCDRotaryMenuItem &getRoot();
+
+    void setCustomLine(const char *customLine, short rowIdx);
+    void unsetCustomLine();
 };
 
 #endif

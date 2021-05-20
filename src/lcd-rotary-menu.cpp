@@ -22,10 +22,34 @@ LCDRotaryMenu::LCDRotaryMenu(int addr, int cols, int rows, int rotAPin, int rotB
     root = new LCDRotaryMenuItem(*this, NULL);
     selectedItem = NULL;
     invalidated = true;
+
+    options.subMenuPostChar = '>';
+
+    customLineRow = -1;
+    rowsBuf = new char *[rows];
+    rowsBuf2 = new char *[rows];
+    for (int r = 0; r < rows; ++r)
+    {
+        rowsBuf[r] = new char[cols];
+        rowsBuf2[r] = new char[cols];
+
+        rowsBuf[r][0] = 0;
+        rowsBuf2[r][0] = 0;
+    }
+
+    lcd->clear();
 }
 
 LCDRotaryMenu::~LCDRotaryMenu()
 {
+    for (int r = 0; r < rows; ++r)
+    {
+        delete rowsBuf2[r];
+        delete rowsBuf[r];
+    }
+    delete rowsBuf;
+    delete rowsBuf2;
+
     delete rotary;
     delete btn;
     delete lcd;
@@ -33,7 +57,8 @@ LCDRotaryMenu::~LCDRotaryMenu()
 
 void LCDRotaryMenu::displayMenu()
 {
-    lcd->clear();
+    if (!invalidated)
+        return;
 
     LCDRotaryMenuItem *parent = (selectedItem == NULL || selectedItem->parent == NULL) ? root : selectedItem->parent;
 
@@ -59,20 +84,88 @@ void LCDRotaryMenu::displayMenu()
     if (selectedItemIndex == -1)
         error("menuitem idx not found");
 
+    int customLineCount = customLineRow != -1 ? 1 : 0;
+
     for (int r = 0; r < rows; ++r)
     {
-        if (parent->scrollRowPos + r >= menuItemsSize)
-            break;
 
-        auto item = menuItems[parent->scrollRowPos + r];
-        if (item == selectedItem)
+        if (r == customLineRow)
         {
-            lcd->setCursor(0, r);
-            lcd->print('>');
-        }
+            int l = strlen(rowsBuf[r]);
+            int l2 = strlen(rowsBuf[r]);
+            if (l != l2 || strncmp(rowsBuf[r], rowsBuf2[r], l) != 0)
+            {
+                strncpy(rowsBuf2[r], rowsBuf[r], l + 1);
 
-        lcd->setCursor(1, r);
-        lcd->print(item->getText().c_str());
+                for (int j = l; j < cols; ++j)
+                    rowsBuf[r][j] = ' ';
+                rowsBuf[r][cols] = 0;
+
+                lcd->setCursor(0, r);
+                lcd->print(rowsBuf[r]);
+            }
+        }
+        else
+        {
+            rowsBuf2[r][0] = 0;
+            int l2 = 0;
+
+            if (parent->scrollRowPos + r >= menuItemsSize + customLineCount)
+            {
+                rowsBuf2[r][0] = ' ';
+                rowsBuf2[r][1] = 0;
+                l2 = 1;
+            }
+            else
+            {
+
+                auto item = menuItems[parent->scrollRowPos + r - (r >= customLineRow ? customLineCount : 0)];
+                if (item == selectedItem)
+                {
+                    rowsBuf2[r][0] = '>';
+                    rowsBuf2[r][1] = 0;
+                }
+                else
+                {
+                    rowsBuf2[r][0] = ' ';
+                    rowsBuf2[r][1] = 0;
+                }
+
+                strncat(rowsBuf2[r], item->getText().c_str(), cols - 1);
+
+                l2 = strlen(rowsBuf2[r]);
+
+                if (item->children.size() > 0 && options.subMenuPostChar != ' ')
+                {
+                    if (l2 >= cols)
+                        rowsBuf2[r][cols - 1] = options.subMenuPostChar;
+                    else
+                    {
+                        rowsBuf2[r][l2] = options.subMenuPostChar;
+                        rowsBuf[r][l2] = 0;
+                        ++l2;
+                    };
+                }
+            }
+            lcd->setCursor(0, r);
+            lcd->print(rowsBuf2[r][0]);
+
+            int l = strlen(rowsBuf[r]);
+
+            if (l2 > 0 && (l2 == 1 || l != l2 || strncmp(rowsBuf2[r] + 1, rowsBuf[r] + 1, l - 1) != 0))
+            {
+                strncpy(rowsBuf[r], rowsBuf2[r], l2);
+
+                if (l2 > cols)
+                    error("l2");
+
+                for (int i = l2; i < cols; ++i)
+                    rowsBuf[r][i] = ' ';
+                rowsBuf[r][cols] = 0;
+                lcd->setCursor(1, r);
+                lcd->print(rowsBuf[r] + 1);
+            }
+        }
     }
 
     invalidated = false;
@@ -113,9 +206,11 @@ void LCDRotaryMenu::move(int diff)
     selectedItem = menuItems[newSelectedItemIndex];
     parent->selectedChild = selectedItem;
 
+    int customLineCnt = customLineRow != -1 ? 1 : 0;
+
     if (newSelectedItemIndex < parent->scrollRowPos)
         parent->scrollRowPos = newSelectedItemIndex;
-    else if (newSelectedItemIndex >= parent->scrollRowPos + rows)
+    else if (newSelectedItemIndex >= parent->scrollRowPos + rows - customLineCnt)
         parent->scrollRowPos = newSelectedItemIndex;
 
     //debug("new menu idx:%d ( scrollpos:%d )", newSelectedItemIndex, parent->scrollRowPos);
@@ -164,6 +259,7 @@ void LCDRotaryMenu::loop()
         if (millis() - menuBeginTimestamp >= splTimeoutMs)
         {
             splashDisplayed = false;
+            lcd->clear();
             displayMenu();
         }
         return;
@@ -202,5 +298,26 @@ void LCDRotaryMenu::loop()
 }
 
 LCDRotaryMenuItem &LCDRotaryMenu::getRoot() { return *root; }
+
+void LCDRotaryMenu::setCustomLine(const char *customLine, short rowIdx)
+{
+    customLineRow = rowIdx;
+    if (customLineRow != -1 && customLineRow < rows)
+    {
+        strncpy(rowsBuf[customLineRow], customLine, cols + 1);
+    }
+    int l = strlen(customLine);
+    for (int i = l; i < cols; ++i)
+        rowsBuf[customLineRow][i] = ' ';
+    rowsBuf[customLineRow][cols] = 0;
+    invalidate();
+}
+
+void LCDRotaryMenu::unsetCustomLine()
+{
+    customLineRow = -1;
+
+    invalidate();
+}
 
 #endif
