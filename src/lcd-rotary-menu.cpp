@@ -230,6 +230,11 @@ void LCDRotaryMenu::setSplashCb(void (*splCb)(LiquidCrystal_I2C &lcd), uint32_t 
     this->splTimeoutMs = timeoutMs;
 }
 
+void LCDRotaryMenu::setDefaultCb(LCDRotaryMenuItemCB cb)
+{
+    defaultCb = cb;
+}
+
 int lastPressCount = 0;
 int lastRotPos = 0;
 

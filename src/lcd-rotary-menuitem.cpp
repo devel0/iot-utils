@@ -11,7 +11,7 @@ void goBack(LCDRotaryMenuItem &item)
 
 LCDRotaryMenuItem::LCDRotaryMenuItem(LCDRotaryMenu &menu, LCDRotaryMenuItem *parent, int tag) : menu(menu)
 {
-    this->parent = parent;    
+    this->parent = parent;
     this->tag = tag;
     scrollRowPos = 0;
     selectedChild = NULL;
@@ -86,13 +86,12 @@ void LCDRotaryMenuItem::select()
     }
 
     if (selectCb != NULL)
-    {
         selectCb(*this);
-    }
-    if (selectCb2 != NULL)
-    {
+    else if (selectCb2 != NULL)
         selectCb2();
-    }
+    else if (menu.defaultCb != NULL)
+        menu.defaultCb(*this);
+        
     menu.invalidate();
 }
 

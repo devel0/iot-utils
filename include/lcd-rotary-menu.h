@@ -60,6 +60,8 @@ class LCDRotaryMenu
     char **rowsBuf2;
     short customLineRow;
 
+    LCDRotaryMenuItemCB defaultCb = NULL;
+
 protected:
     void displayMenu();
     void invalidate();
@@ -92,6 +94,11 @@ public:
      * @param timeoutMs time after which menu display
      */
     void setSplashCb(void (*splCb)(LiquidCrystal_I2C &lcd), uint32_t timeoutMs);
+
+    /**
+     * @brief set default callback when select menuitem that has no custom callback
+     */
+    void setDefaultCb(LCDRotaryMenuItemCB cb);
 
     void init();
     void loop();    
