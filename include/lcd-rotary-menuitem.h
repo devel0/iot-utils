@@ -26,9 +26,9 @@ class LCDRotaryMenuItem
     /**
      * @brief null if this menu is the root     
      */
-    LCDRotaryMenuItem *parent;    
+    LCDRotaryMenuItem *parent;
 
-    LCDRotaryMenuItem(LCDRotaryMenu &menu, LCDRotaryMenuItem *parent);
+    LCDRotaryMenuItem(LCDRotaryMenu &menu, LCDRotaryMenuItem *parent, int tag = -1);
 
     vector<LCDRotaryMenuItem *> children;
 
@@ -44,22 +44,27 @@ class LCDRotaryMenuItem
     /**
      * @brief callback when select this menuitem     
      */
-    LCDRotaryMenuItemCB selectCb = NULL;    
+    LCDRotaryMenuItemCB selectCb = NULL;
 
     /**
      * @brief callback when select this menuitem ( argument less )
      */
-    void (*selectCb2)() = NULL;    
+    void (*selectCb2)() = NULL;
 
     bool isBack = false;
+
+    int tag = -1;
 
 public:
     ~LCDRotaryMenuItem();
 
     /**
      * @brief append new child ( deallocation automatic )
+     * 
+     * @param menuText text for the item
+     * @param tag optional user tag useful to manage callback with switch type     
      */
-    LCDRotaryMenuItem &append(string menuText);
+    LCDRotaryMenuItem &append(string menuText, int tag = -1);
 
     LCDRotaryMenuItem *getParent();
 
@@ -83,6 +88,13 @@ public:
     void back();
 
     const string &getText() const;
+
+    /**
+     * @brief retrieve user tag associated to this menuitem ( useful when manage with single callback that switch on menuitem tag )
+     * 
+     * @return int 
+     */
+    int getTag() const;
 };
 
 #endif
