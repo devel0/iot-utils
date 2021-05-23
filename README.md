@@ -119,7 +119,7 @@ void loop()
 
 ### lcd rotary menu with tags
 
-[see example03](examples/example03/example03.cpp)
+[see example03](examples/example03/example03.cpp) and [example04](examples/example04/example04/cpp) with defaultCb.
 
 ### double to string
 
