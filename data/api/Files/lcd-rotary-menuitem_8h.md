@@ -100,9 +100,9 @@ class LCDRotaryMenuItem
 
     LCDRotaryMenu &menu;
 
-    LCDRotaryMenuItem *parent;    
+    LCDRotaryMenuItem *parent;
 
-    LCDRotaryMenuItem(LCDRotaryMenu &menu, LCDRotaryMenuItem *parent);
+    LCDRotaryMenuItem(LCDRotaryMenu &menu, LCDRotaryMenuItem *parent, int tag = -1);
 
     vector<LCDRotaryMenuItem *> children;
 
@@ -112,14 +112,18 @@ class LCDRotaryMenuItem
 
     LCDRotaryMenuItem *selectedChild;
 
-    LCDRotaryMenuItemCB selectCb = NULL;    
+    LCDRotaryMenuItemCB selectCb = NULL;
 
-    void (*selectCb2)() = NULL;    
+    void (*selectCb2)() = NULL;
+
+    bool isBack = false;
+
+    int tag = -1;
 
 public:
     ~LCDRotaryMenuItem();
 
-    LCDRotaryMenuItem &append(string menuText);
+    LCDRotaryMenuItem &append(string menuText, int tag = -1);
 
     LCDRotaryMenuItem *getParent();
 
@@ -134,6 +138,8 @@ public:
     void back();
 
     const string &getText() const;
+
+    int getTag() const;
 };
 
 #endif
@@ -144,4 +150,4 @@ public:
 
 -------------------------------
 
-Updated on 20 May 2021 at 12:04:49 CEST
+Updated on 23 May 2021 at 11:28:50 CEST

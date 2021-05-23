@@ -6,6 +6,7 @@
 * [Quickstart](#quickstart)
 * [Examples](#examples)
   + [lcd rotary menu](#lcd-rotary-menu)
+  + [lcd rotary menu with tags](#lcd-rotary-menu-with-tags)
   + [double to string](#double-to-string)
 * [Debugging](#debugging)
 * [Unit tests](#unit-tests)
@@ -116,6 +117,9 @@ void loop()
 }
 ```
 
+### lcd rotary menu with tags
+
+[see example03](examples/example03/example03.cpp)
 
 ### double to string
 

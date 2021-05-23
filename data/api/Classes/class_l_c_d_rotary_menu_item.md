@@ -32,7 +32,7 @@ title: LCDRotaryMenuItem
 |                | Name           |
 | -------------- | -------------- |
 |  | **[~LCDRotaryMenuItem](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-~lcdrotarymenuitem)**()  |
-| [LCDRotaryMenuItem](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md) & | **[append](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-append)**(string menuText) <br>append new child ( deallocation automatic )  |
+| [LCDRotaryMenuItem](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md) & | **[append](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-append)**(string menuText, int tag =-1) <br>append new child ( deallocation automatic )  |
 | [LCDRotaryMenuItem](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md) * | **[getParent](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-getparent)**()  |
 | void | **[setText](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-settext)**(string menuText)  |
 | void | **[onSelect](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-onselect)**([LCDRotaryMenuItemCB](https://github.com/devel0/iot-utils/tree/main/data/api/Files/lcd-rotary-menuitem_8h.md#typedef-lcdrotarymenuitemcb) cb) <br>set callback on select this item  |
@@ -40,6 +40,7 @@ title: LCDRotaryMenuItem
 | void | **[select](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-select)**() <br>enter this menuitem (if children) selecting last child of it selected or first if never entered before  |
 | void | **[back](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-back)**() <br>exit this menu and go back  |
 | const string & | **[getText](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-gettext)**() const  |
+| int | **[getTag](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-gettag)**() const <br>retrieve user tag associated to this menuitem ( useful when manage with single callback that switch on menuitem tag )  |
 
 
 
@@ -106,11 +107,17 @@ title: LCDRotaryMenuItem
 
 ```cpp
 LCDRotaryMenuItem & append(
-    string menuText
+    string menuText,
+    int tag =-1
 )
 ```
 
 append new child ( deallocation automatic ) 
+
+**Parameters**: 
+
+  * **menuText** text for the item 
+  * **tag** optional user tag useful to manage callback with switch type 
 
 
 
@@ -386,6 +393,42 @@ const string & getText() const
 
 
 
+### function getTag
+
+```cpp
+int getTag() const
+```
+
+retrieve user tag associated to this menuitem ( useful when manage with single callback that switch on menuitem tag ) 
+
+
+
+
+
+
+
+**Return**: int 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -432,4 +475,4 @@ friend class LCDRotaryMenu;
 
 -------------------------------
 
-Updated on 20 May 2021 at 12:04:49 CEST
+Updated on 23 May 2021 at 11:28:50 CEST

@@ -36,6 +36,7 @@ title: LCDRotaryMenuOptions
 |                | Name           |
 | -------------- | -------------- |
 | char | **[subMenuPostChar](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/struct_l_c_d_rotary_menu_options.md#variable-submenupostchar)** <br>if not space then the char is appended at end of menu text to inform the user that the selected item is a submenu item  |
+| const char * | **[backString](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/struct_l_c_d_rotary_menu_options.md#variable-backstring)** <br>text string for back menu label  |
 
 
 
@@ -94,10 +95,45 @@ if not space then the char is appended at end of menu text to inform the user th
 
 
 
+### variable backString
+
+```cpp
+const char * backString;
+```
+
+text string for back menu label 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 -------------------------------
 
-Updated on 20 May 2021 at 12:04:49 CEST
+Updated on 23 May 2021 at 11:28:50 CEST
