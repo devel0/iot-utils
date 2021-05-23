@@ -35,6 +35,7 @@ LCD Rotary Menu.  [More...](#detailed-description)
 |  | **[LCDRotaryMenu](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-lcdrotarymenu)**(int addr, int cols, int rows, int rotAPin, int rotBPin, int rotSWPin, bool inverted =false, int btnDebounceMs =50, int abDebounceUs =1500) <br>Construct a new [LCDRotaryMenu](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md) object.  |
 |  | **[~LCDRotaryMenu](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-~lcdrotarymenu)**()  |
 | void | **[setSplashCb](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-setsplashcb)**(void(*)(LiquidCrystal_I2C &lcd) splCb, uint32_t timeoutMs) <br>Set splash callback before Init.  |
+| void | **[setDefaultCb](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-setdefaultcb)**([LCDRotaryMenuItemCB](https://github.com/devel0/iot-utils/tree/main/data/api/Files/lcd-rotary-menuitem_8h.md#typedef-lcdrotarymenuitemcb) cb) <br>set default callback when select menuitem that has no custom callback  |
 | void | **[init](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-init)**()  |
 | void | **[loop](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-loop)**()  |
 | [LCDRotaryMenuItem](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md) & | **[getRoot](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-getroot)**()  |
@@ -221,6 +222,43 @@ Set splash callback before Init.
 
   * **splCb** callback here you can directly used lcd ( clear, setCursor, print ) 
   * **timeoutMs** time after which menu display 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### function setDefaultCb
+
+```cpp
+void setDefaultCb(
+    LCDRotaryMenuItemCB cb
+)
+```
+
+set default callback when select menuitem that has no custom callback 
 
 
 
@@ -610,4 +648,3 @@ friend class LCDRotaryMenuItem;
 
 -------------------------------
 
-Updated on 23 May 2021 at 11:28:50 CEST

@@ -87,6 +87,8 @@ class LCDRotaryMenu
     char **rowsBuf2;
     short customLineRow;
 
+    LCDRotaryMenuItemCB defaultCb = NULL;
+
 protected:
     void displayMenu();
     void invalidate();
@@ -100,6 +102,8 @@ public:
     LCDRotaryMenuOptions options;
 
     void setSplashCb(void (*splCb)(LiquidCrystal_I2C &lcd), uint32_t timeoutMs);
+
+    void setDefaultCb(LCDRotaryMenuItemCB cb);
 
     void init();
     void loop();    
@@ -118,4 +122,4 @@ public:
 
 -------------------------------
 
-Updated on 23 May 2021 at 11:28:50 CEST
+
