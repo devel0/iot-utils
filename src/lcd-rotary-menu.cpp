@@ -329,4 +329,9 @@ void LCDRotaryMenu::unsetCustomLine()
     }
 }
 
+LiquidCrystal_I2C &LCDRotaryMenu::getLCD()
+{
+    return *lcd;
+}
+
 #endif

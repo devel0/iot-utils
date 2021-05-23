@@ -107,6 +107,11 @@ public:
 
     void setCustomLine(const char *customLine, short rowIdx);
     void unsetCustomLine();
+
+    /**
+     * @brief retrieve lcd pointer ( advanced )          
+     */
+    LiquidCrystal_I2C& getLCD();
 };
 
 #endif
