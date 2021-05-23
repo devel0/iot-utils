@@ -33,6 +33,13 @@
             "files": [
                 "example02.cpp"
             ]
+        },
+        {
+            "name": "example03",
+            "base": "examples/example03",
+            "files": [
+                "example03.cpp"
+            ]
         }
     ],
     "export": {
