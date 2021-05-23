@@ -22,6 +22,8 @@ LCDRotaryMenu::LCDRotaryMenu(int addr, int cols, int rows, int rotAPin, int rotB
     root = new LCDRotaryMenuItem(*this, NULL);
     selectedItem = NULL;
     invalidated = true;
+    displayedMenuItems = new LCDRotaryMenuItem *[rows];
+    for (int i=0; i < rows; ++i) displayedMenuItems[i] = NULL;
 
     options.subMenuPostChar = '>';
     options.backString = "..";
@@ -50,6 +52,9 @@ LCDRotaryMenu::~LCDRotaryMenu()
     }
     delete rowsBuf;
     delete rowsBuf2;
+
+    delete displayedMenuItems;
+    delete root;
 
     delete rotary;
     delete btn;
@@ -89,6 +94,7 @@ void LCDRotaryMenu::displayMenu()
 
     for (int r = 0; r < rows; ++r)
     {
+        displayedMenuItems[r] = NULL;
 
         if (r == customLineRow)
         {
@@ -131,6 +137,8 @@ void LCDRotaryMenu::displayMenu()
                     rowsBuf2[r][0] = ' ';
                     rowsBuf2[r][1] = 0;
                 }
+
+                displayedMenuItems[r] = item;
 
                 strncat(rowsBuf2[r], item->getText().c_str(), cols - 1);
 
@@ -304,6 +312,8 @@ void LCDRotaryMenu::loop()
 }
 
 LCDRotaryMenuItem &LCDRotaryMenu::getRoot() { return *root; }
+
+LCDRotaryMenuItem *LCDRotaryMenu::getSelected() { return selectedItem; }
 
 void LCDRotaryMenu::setCustomLine(const char *customLine, short rowIdx)
 {

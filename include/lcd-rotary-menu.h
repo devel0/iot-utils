@@ -33,7 +33,7 @@ struct LCDRotaryMenuOptions
  */
 class LCDRotaryMenu
 {
-    friend class LCDRotaryMenuItem;    
+    friend class LCDRotaryMenuItem;
 
     int cols;
     int rows;
@@ -55,12 +55,17 @@ class LCDRotaryMenu
     LCDRotaryMenuItem *root;
     LCDRotaryMenuItem *selectedItem;
     bool invalidated;
-    
+
     char **rowsBuf;
     char **rowsBuf2;
     short customLineRow;
 
     LCDRotaryMenuItemCB defaultCb = NULL;
+
+    /**
+     * @brief for purpose of isDisplayed() fn     
+     */
+    LCDRotaryMenuItem **displayedMenuItems;
 
 protected:
     void displayMenu();
@@ -83,7 +88,7 @@ public:
      */
     LCDRotaryMenu(int addr, int cols, int rows, int rotAPin, int rotBPin, int rotSWPin, bool inverted = false,
                   int btnDebounceMs = 50, int abDebounceUs = 1500);
-    ~LCDRotaryMenu();    
+    ~LCDRotaryMenu();
 
     LCDRotaryMenuOptions options;
 
@@ -101,9 +106,14 @@ public:
     void setDefaultCb(LCDRotaryMenuItemCB cb);
 
     void init();
-    void loop();    
+    void loop();
 
     LCDRotaryMenuItem &getRoot();
+
+    /**
+     * @brief retrieve currently selected menu     
+     */
+    LCDRotaryMenuItem *getSelected();
 
     void setCustomLine(const char *customLine, short rowIdx);
     void unsetCustomLine();
@@ -111,7 +121,7 @@ public:
     /**
      * @brief retrieve lcd pointer ( advanced )          
      */
-    LiquidCrystal_I2C& getLCD();
+    LiquidCrystal_I2C &getLCD();
 };
 
 #endif

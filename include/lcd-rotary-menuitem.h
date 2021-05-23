@@ -51,7 +51,7 @@ class LCDRotaryMenuItem
      */
     void (*selectCb2)() = NULL;
 
-    bool isBack = false;
+    bool isBack = false;    
 
     int tag = -1;
 
@@ -95,6 +95,8 @@ public:
      * @return int 
      */
     int getTag() const;
+
+    bool isDisplayed() const;
 };
 
 #endif

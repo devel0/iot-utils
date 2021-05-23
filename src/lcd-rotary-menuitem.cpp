@@ -91,7 +91,7 @@ void LCDRotaryMenuItem::select()
         selectCb2();
     else if (menu.defaultCb != NULL)
         menu.defaultCb(*this);
-        
+
     menu.invalidate();
 }
 
@@ -109,6 +109,15 @@ const string &LCDRotaryMenuItem::getText() const
 int LCDRotaryMenuItem::getTag() const
 {
     return tag;
+}
+
+bool LCDRotaryMenuItem::isDisplayed() const
+{
+    for (int i = 0; i < menu.cols; ++i)
+        if (menu.displayedMenuItems[i] == this)
+            return true;
+
+    return false;
 }
 
 #endif
