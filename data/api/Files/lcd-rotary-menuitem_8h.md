@@ -116,7 +116,7 @@ class LCDRotaryMenuItem
 
     void (*selectCb2)() = NULL;
 
-    bool isBack = false;
+    bool isBack = false;    
 
     int tag = -1;
 
@@ -140,6 +140,8 @@ public:
     const string &getText() const;
 
     int getTag() const;
+
+    bool isDisplayed() const;
 };
 
 #endif

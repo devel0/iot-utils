@@ -39,8 +39,10 @@ LCD Rotary Menu.  [More...](#detailed-description)
 | void | **[init](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-init)**()  |
 | void | **[loop](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-loop)**()  |
 | [LCDRotaryMenuItem](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md) & | **[getRoot](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-getroot)**()  |
+| [LCDRotaryMenuItem](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md) * | **[getSelected](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-getselected)**() <br>retrieve currently selected menu  |
 | void | **[setCustomLine](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-setcustomline)**(const char * customLine, short rowIdx)  |
 | void | **[unsetCustomLine](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-unsetcustomline)**()  |
+| LiquidCrystal_I2C & | **[getLCD](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu.md#function-getlcd)**() <br>retrieve lcd pointer ( advanced )  |
 
 ## Protected Functions
 
@@ -389,6 +391,41 @@ LCDRotaryMenuItem & getRoot()
 
 
 
+### function getSelected
+
+```cpp
+LCDRotaryMenuItem * getSelected()
+```
+
+retrieve currently selected menu 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### function setCustomLine
 
 ```cpp
@@ -432,6 +469,41 @@ void setCustomLine(
 void unsetCustomLine()
 ```
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### function getLCD
+
+```cpp
+LiquidCrystal_I2C & getLCD()
+```
+
+retrieve lcd pointer ( advanced ) 
 
 
 

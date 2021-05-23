@@ -41,6 +41,7 @@ title: LCDRotaryMenuItem
 | void | **[back](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-back)**() <br>exit this menu and go back  |
 | const string & | **[getText](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-gettext)**() const  |
 | int | **[getTag](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-gettag)**() const <br>retrieve user tag associated to this menuitem ( useful when manage with single callback that switch on menuitem tag )  |
+| bool | **[isDisplayed](https://github.com/devel0/iot-utils/tree/main/data/api/Classes/class_l_c_d_rotary_menu_item.md#function-isdisplayed)**() const  |
 
 
 
@@ -408,6 +409,40 @@ retrieve user tag associated to this menuitem ( useful when manage with single c
 
 
 **Return**: int 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### function isDisplayed
+
+```cpp
+bool isDisplayed() const
+```
+
+
+
+
+
+
+
+
 
 
 
