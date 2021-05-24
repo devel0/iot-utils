@@ -9,10 +9,11 @@ void goBack(LCDRotaryMenuItem &item)
     item.back();
 }
 
-LCDRotaryMenuItem::LCDRotaryMenuItem(LCDRotaryMenu &menu, LCDRotaryMenuItem *parent, int tag) : menu(menu)
+LCDRotaryMenuItem::LCDRotaryMenuItem(LCDRotaryMenu &menu, LCDRotaryMenuItem *parent, int tag, void *custom) : menu(menu)
 {
     this->parent = parent;
     this->tag = tag;
+    this->customPtr = custom;
     scrollRowPos = 0;
     selectedChild = NULL;
 
@@ -27,12 +28,26 @@ LCDRotaryMenuItem::LCDRotaryMenuItem(LCDRotaryMenu &menu, LCDRotaryMenuItem *par
 
 LCDRotaryMenuItem::~LCDRotaryMenuItem()
 {
-    // TODO: deallocate menu items
+    int cs = children.size();
+    for (int ci = 0; ci < cs; ++ci)
+    {
+        delete children[ci];
+    }
 }
 
-LCDRotaryMenuItem &LCDRotaryMenuItem::append(string menuText, int tag)
+void LCDRotaryMenuItem::clear()
 {
-    auto newItem = new LCDRotaryMenuItem(menu, this, tag);
+    int cs = children.size();
+    for (int ci = 0; ci < cs; ++ci)
+    {
+        delete children[ci];
+    }
+    children.clear();
+}
+
+LCDRotaryMenuItem &LCDRotaryMenuItem::append(String menuText, int tag, void *custom)
+{
+    auto newItem = new LCDRotaryMenuItem(menu, this, tag, custom);
     newItem->setText(menuText);
 
     if (this != menu.root && children.size() == 0)
@@ -64,7 +79,7 @@ void LCDRotaryMenuItem::onSelect(void (*cb)())
     this->selectCb2 = cb;
 }
 
-void LCDRotaryMenuItem::setText(string menuText)
+void LCDRotaryMenuItem::setText(String menuText)
 {
     text = menuText;
     menu.invalidate();
@@ -101,7 +116,7 @@ void LCDRotaryMenuItem::back()
     menu.invalidate();
 }
 
-const string &LCDRotaryMenuItem::getText() const
+const String &LCDRotaryMenuItem::getText() const
 {
     return text;
 }
@@ -109,6 +124,11 @@ const string &LCDRotaryMenuItem::getText() const
 int LCDRotaryMenuItem::getTag() const
 {
     return tag;
+}
+
+void *LCDRotaryMenuItem::getCustom()
+{
+    return customPtr;
 }
 
 bool LCDRotaryMenuItem::isDisplayed() const

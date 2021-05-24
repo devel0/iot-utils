@@ -23,7 +23,8 @@ LCDRotaryMenu::LCDRotaryMenu(int addr, int cols, int rows, int rotAPin, int rotB
     selectedItem = NULL;
     invalidated = true;
     displayedMenuItems = new LCDRotaryMenuItem *[rows];
-    for (int i=0; i < rows; ++i) displayedMenuItems[i] = NULL;
+    for (int i = 0; i < rows; ++i)
+        displayedMenuItems[i] = NULL;
 
     options.subMenuPostChar = '>';
     options.backString = "..";
@@ -243,6 +244,11 @@ void LCDRotaryMenu::setDefaultCb(LCDRotaryMenuItemCB cb)
     defaultCb = cb;
 }
 
+void LCDRotaryMenu::setButtonCb(void (*cb)())
+{
+    this->btnCb = cb;
+}
+
 int lastPressCount = 0;
 int lastRotPos = 0;
 
@@ -291,6 +297,8 @@ void LCDRotaryMenu::loop()
             redrawMenu = true;
         }
 
+        if (btnCb != NULL)
+            btnCb();
         //debug("press cnt = %d", lastPressCount);
     }
 

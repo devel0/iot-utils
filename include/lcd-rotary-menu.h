@@ -67,6 +67,8 @@ class LCDRotaryMenu
      */
     LCDRotaryMenuItem **displayedMenuItems;
 
+    void (*btnCb)() = NULL;
+
 protected:
     void displayMenu();
     void invalidate();
@@ -104,6 +106,8 @@ public:
      * @brief set default callback when select menuitem that has no custom callback
      */
     void setDefaultCb(LCDRotaryMenuItemCB cb);
+
+    void setButtonCb(void (*cb)());
 
     void init();
     void loop();

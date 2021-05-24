@@ -28,11 +28,11 @@ class LCDRotaryMenuItem
      */
     LCDRotaryMenuItem *parent;
 
-    LCDRotaryMenuItem(LCDRotaryMenu &menu, LCDRotaryMenuItem *parent, int tag = -1);
+    LCDRotaryMenuItem(LCDRotaryMenu &menu, LCDRotaryMenuItem *parent, int tag = -1, void *custom = NULL);
 
     vector<LCDRotaryMenuItem *> children;
 
-    string text;
+    String text;
 
     /**
      * @brief children scroll row     
@@ -51,24 +51,32 @@ class LCDRotaryMenuItem
      */
     void (*selectCb2)() = NULL;
 
-    bool isBack = false;    
+    bool isBack = false;
 
     int tag = -1;
 
+    void *customPtr = NULL;
+
 public:
     ~LCDRotaryMenuItem();
+
+    /**
+     * @brief remove children    
+     */
+    void clear();
 
     /**
      * @brief append new child ( deallocation automatic )
      * 
      * @param menuText text for the item
      * @param tag optional user tag useful to manage callback with switch type     
+     * @param custom void * custom ptr
      */
-    LCDRotaryMenuItem &append(string menuText, int tag = -1);
+    LCDRotaryMenuItem &append(String menuText, int tag = -1, void *custom = NULL);
 
     LCDRotaryMenuItem *getParent();
 
-    void setText(string menuText);
+    void setText(String menuText);
 
     /**
      * @brief set callback on select this item
@@ -87,7 +95,7 @@ public:
      */
     void back();
 
-    const string &getText() const;
+    const String &getText() const;
 
     /**
      * @brief retrieve user tag associated to this menuitem ( useful when manage with single callback that switch on menuitem tag )
@@ -95,6 +103,8 @@ public:
      * @return int 
      */
     int getTag() const;
+
+    void *getCustom();
 
     bool isDisplayed() const;
 };
