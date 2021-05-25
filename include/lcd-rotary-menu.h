@@ -59,6 +59,7 @@ class LCDRotaryMenu
     char **rowsBuf;
     char **rowsBuf2;
     short customLineRow;
+    short customLineRow2;
 
     LCDRotaryMenuItemCB defaultCb = NULL;
 
@@ -107,6 +108,11 @@ public:
      */
     void setDefaultCb(LCDRotaryMenuItemCB cb);
 
+    /**
+     * @brief set callback that will be called everytime button switch ; it's called before any specific onSelect callback
+     * 
+     * @param cb 
+     */
     void setButtonCb(void (*cb)());
 
     void init();
@@ -120,6 +126,7 @@ public:
     LCDRotaryMenuItem *getSelected();
 
     void setCustomLine(const char *customLine, short rowIdx);
+    void setCustomLine2(const char *customLine2, short rowIdx);
     void unsetCustomLine();
 
     /**

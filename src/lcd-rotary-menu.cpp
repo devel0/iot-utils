@@ -30,6 +30,7 @@ LCDRotaryMenu::LCDRotaryMenu(int addr, int cols, int rows, int rotAPin, int rotB
     options.backString = "..";
 
     customLineRow = -1;
+    customLineRow2 = -1;
     rowsBuf = new char *[rows];
     rowsBuf2 = new char *[rows];
     for (int r = 0; r < rows; ++r)
@@ -92,12 +93,14 @@ void LCDRotaryMenu::displayMenu()
         error("menuitem idx not found");
 
     int customLineCount = customLineRow != -1 ? 1 : 0;
+    if (customLineRow2 != -1)
+        ++customLineCount;
 
     for (int r = 0; r < rows; ++r)
     {
         displayedMenuItems[r] = NULL;
 
-        if (r == customLineRow)
+        if (r == customLineRow || r == customLineRow2)
         {
             int l = strlen(rowsBuf[r]);
             int l2 = strlen(rowsBuf[r]);
@@ -217,6 +220,8 @@ void LCDRotaryMenu::move(int diff)
     parent->selectedChild = selectedItem;
 
     int customLineCnt = customLineRow != -1 ? 1 : 0;
+    if (customLineRow2 != -1)
+        ++customLineCnt;
 
     if (newSelectedItemIndex < parent->scrollRowPos)
         parent->scrollRowPos = newSelectedItemIndex;
@@ -290,6 +295,10 @@ void LCDRotaryMenu::loop()
     if (btn->getPressCount() != lastPressCount)
     {
         lastPressCount = btn->getPressCount();
+
+        if (btnCb != NULL)
+            btnCb();
+
         if (selectedItem != NULL)
         {
             selectedItem->select();
@@ -297,8 +306,6 @@ void LCDRotaryMenu::loop()
             redrawMenu = true;
         }
 
-        if (btnCb != NULL)
-            btnCb();
         //debug("press cnt = %d", lastPressCount);
     }
 
@@ -337,11 +344,26 @@ void LCDRotaryMenu::setCustomLine(const char *customLine, short rowIdx)
     invalidate();
 }
 
+void LCDRotaryMenu::setCustomLine2(const char *customLine2, short rowIdx)
+{
+    customLineRow2 = rowIdx;
+    if (customLineRow2 != -1 && customLineRow < rows)
+    {
+        strncpy(rowsBuf[customLineRow2], customLine2, cols + 1);
+    }
+    int l = strlen(customLine2);
+    for (int i = l; i < cols; ++i)
+        rowsBuf[customLineRow2][i] = ' ';
+    rowsBuf[customLineRow2][cols] = 0;
+    invalidate();
+}
+
 void LCDRotaryMenu::unsetCustomLine()
 {
-    if (customLineRow != -1)
+    if (customLineRow != -1 || customLineRow2 != -1)
     {
         customLineRow = -1;
+        customLineRow2 = -1;
 
         invalidate();
     }
