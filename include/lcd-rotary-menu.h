@@ -70,6 +70,8 @@ class LCDRotaryMenu
 
     void (*btnCb)() = NULL;
 
+    bool busyMode = false;
+
 protected:
     void displayMenu();
     void invalidate();
@@ -133,6 +135,9 @@ public:
      * @brief retrieve lcd pointer ( advanced )          
      */
     LiquidCrystal_I2C &getLCD();
+
+    void setBusyLine(const char *busyLine, short rowIdx);
+    void unsetBusy();
 };
 
 #endif

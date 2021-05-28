@@ -279,6 +279,8 @@ void LCDRotaryMenu::init()
 
 void LCDRotaryMenu::loop()
 {
+    if (busyMode) return;
+    
     if (splashDisplayed)
     {
         if (millis() - menuBeginTimestamp >= splTimeoutMs)
@@ -372,6 +374,23 @@ void LCDRotaryMenu::unsetCustomLine()
 LiquidCrystal_I2C &LCDRotaryMenu::getLCD()
 {
     return *lcd;
+}
+
+void LCDRotaryMenu::setBusyLine(const char *busyLine, short rowIdx)
+{
+    if (!busyMode)
+    {
+        lcd->clear();
+        busyMode = true;
+    }
+    lcd->setCursor(0, rowIdx);
+    lcd->print(busyLine);
+}
+
+void LCDRotaryMenu::unsetBusy()
+{
+    busyMode = false;
+    invalidate();
 }
 
 #endif
