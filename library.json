@@ -1,8 +1,8 @@
 {
     "name": "iot-utils",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "Utilities for ststm32 framework and mbed, arduino platforms.",
-    "keywords": "util,string,double",
+    "keywords": "util,string,double,lcd,rotary",
     "authors": {
         "name": "Lorenzo Delana",
         "email": "lorenzo.delana@gmail.com"
@@ -49,6 +49,10 @@
             ]
         }
     ],
+    "dependencies": {
+        "Wire": "*",
+        "marcoschwartz/LiquidCrystal_I2C": "^1.1.4"
+    },
     "export": {
         "exclude": [
             "src/debug-main.cpp"
