@@ -21,4 +21,19 @@ using namespace std;
  */
 string tostr(double d, int decimals = -16, bool trim_leading_zeroes = true);
 
+/**
+ * @brief trim beginning spaces
+ */
+string ltrim(const string &str);
+
+/**
+ * @brief trim ending spaces
+ */
+string rtrim(const string &str);
+
+/**
+ * @brief trim begin and ending spaces
+ */
+string trim(const string &str);
+
 #endif

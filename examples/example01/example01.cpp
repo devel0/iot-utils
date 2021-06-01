@@ -12,8 +12,9 @@ void setup()
 int main()
 #endif
 {
-    printf("START\n");
 
+    printf("START\n");
+    
     // v (size=6) : {1.2, 3.4, 5.6, 7.8, 9.10, 11.12}
     {
         vector<double> v;
@@ -27,7 +28,7 @@ int main()
         }
         printf("}\n");
     }
-    
+
     //
     // DOUBLE TO STRING
     //
@@ -136,6 +137,11 @@ int main()
             n = n->next;
         }
     }
+
+    //
+    // STRING ( trim )
+    // TODO: tests
+    //
 }
 
 #if defined(ARDUINO)

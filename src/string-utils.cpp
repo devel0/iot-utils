@@ -183,3 +183,35 @@ string tostr(double d, int decimals, bool trim_leading_zeroes)
 
     return s;
 }
+
+string ltrim(const string &str)
+{
+    int i = 0;
+    auto pstr = str.c_str();
+    while (pstr[i] && isspace(pstr[i]))
+        ++i;
+    return str.substr(i);
+}
+
+string rtrim(const string &str)
+{
+    int l = str.length();
+    int i = l - 1;
+    auto pstr = str.c_str();
+    while (i > 0 && isspace(pstr[i]))
+        --i;
+    return str.substr(0, i + 1);
+}
+
+string trim(const string &str)
+{
+    int i = 0;
+    int l = str.length();
+    auto pstr = str.c_str();
+    while (pstr[i] && isspace(pstr[i]))
+        ++i;
+    int ir = l - 1;
+    while (ir > i && ir > 0 && isspace(pstr[ir]))
+        --ir;
+    return str.substr(i, ir - i + 1);
+}
