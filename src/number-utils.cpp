@@ -31,3 +31,37 @@ int64_t frexp10(double d, int *expb10)
 
     return c;
 }
+
+bool EqualsTol(double tol, double x, double y)
+{
+    return abs(x - y) <= tol;
+}
+
+bool GreatThanTol(double tol, double x, double y)
+{
+    return x > y && !EqualsTol(tol, x, y);
+}
+
+bool GreatThanOrEqualsTol(double tol, double x, double y)
+{
+    return x > y || EqualsTol(tol, x, y);
+}
+
+bool LessThanTol(double tol, double x, double y)
+{
+    return x < y && !EqualsTol(tol, x, y);
+}
+
+bool LessThanOrEqualsTol(double tol, double x, double y)
+{
+    return x < y || EqualsTol(tol, x, y);
+}
+
+int CompareTol(double tol, double x, double y)
+{
+    if (EqualsTol(tol, x, y))
+        return 0;
+    if (x < y)
+        return -1;
+    return 1;
+}

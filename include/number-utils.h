@@ -18,4 +18,34 @@
  */
 int64_t frexp10(double d, int *expb10);
 
+/**
+ * @brief true if ( |x-y| <= tol )
+ */
+bool EqualsTol(double tol, double x, double y);
+
+/**
+ * @brief true if (x > y) AND NOT ( |x-y| <= tol )
+ */
+bool GreatThanTol(double tol, double x, double y);
+
+/**
+ * @brief true if (x > y) AND ( |x-y| <= tol )
+ */
+bool GreatThanOrEqualsTol(double tol, double x, double y);
+
+/**
+ * @brief true if (x < y) AND NOT ( |x-y| <= tol )
+ */
+bool LessThanTol(double tol, double x, double y);
+
+/**
+ * @brief true if (x < y) AND ( |x-y| <= tol )
+ */
+bool LessThanOrEqualsTol(double tol, double x, double y);
+
+/**
+ * @brief return 0 if equalstol, -1 if x<~y or 1 if x>~y
+ */
+int CompareTol(double tol, double x, double y);
+
 #endif
