@@ -1,8 +1,8 @@
 {
     "name": "iot-utils",
-    "version": "1.4.1",
+    "version": "1.5.0",
     "description": "Utilities for ststm32 framework and mbed, arduino platforms.",
-    "keywords": "util,string,double,lcd,rotary",
+    "keywords": "util,string,double.debounce",
     "authors": {
         "name": "Lorenzo Delana",
         "email": "lorenzo.delana@gmail.com"
@@ -26,32 +26,9 @@
             "files": [
                 "example01.cpp"
             ]
-        },
-        {
-            "name": "example02",
-            "base": "examples/example02",
-            "files": [
-                "example02.cpp"
-            ]
-        },
-        {
-            "name": "example03",
-            "base": "examples/example03",
-            "files": [
-                "example03.cpp"
-            ]
-        },
-        {
-            "name": "example04",
-            "base": "examples/example04",
-            "files": [
-                "example04.cpp"
-            ]
         }
     ],
-    "dependencies": {
-        "Wire": "*",
-        "marcoschwartz/LiquidCrystal_I2C": "^1.1.4"
+    "dependencies": {        
     },
     "export": {
         "exclude": [
