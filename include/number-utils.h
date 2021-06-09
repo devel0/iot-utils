@@ -48,4 +48,35 @@ bool LessThanOrEqualsTol(double tol, double x, double y);
  */
 int CompareTol(double tol, double x, double y);
 
+/**
+ * @brief convert given angle(deg) to rad 
+ */
+double ToRad(double angleDeg);
+
+/**
+ * @brief convert given angle(rad) to deg
+ */
+double ToDeg(double angleRad);
+
+/**
+ * @brief Round the given value using the multiple basis
+ */
+double MRound(double value, double multiple);
+
+/**
+ * @brief returns 1.0 if n>=0 ; -1 otherwise
+ */
+double Sign(int n);
+
+/**
+ * @brief returns 1.0 if n>=0 ; -1 otherwise
+ */
+double Sign(double n);
+
+/**
+ * @brief Magnitude of given number. (eg. 190 -> 1.9e2 -> 2)
+ *  (eg. 0.0034 -> 3.4e-3 -> -3)
+ */
+int Magnitude(double value);
+
 #endif

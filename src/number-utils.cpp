@@ -1,5 +1,8 @@
 #include "number-utils.h"
 
+#include <cmath>
+using namespace std;
+
 int64_t frexp10(double d, int *expb10)
 {
     //
@@ -64,4 +67,50 @@ int CompareTol(double tol, double x, double y)
     if (x < y)
         return -1;
     return 1;
+}
+
+double ToRad(double angleDeg)
+{
+    return angleDeg / 180.0 * PI;
+}
+
+double ToDeg(double angleRad)
+{
+    return angleRad / PI * 180.0;
+}
+
+double MRound(double value, double multiple)
+{
+    if (abs(multiple) < std::numeric_limits<double>::epsilon())
+        return value;
+
+    auto p = ::round(value / multiple);
+
+    return trunc(p) * multiple;
+}
+
+double Sign(int n)
+{
+    if (n >= 0)
+        return 1.0;
+    return -1.0;
+}
+
+double Sign(double n)
+{
+    if (n >= 0)
+        return 1.0;
+    return -1.0;
+}
+
+int Magnitude(double value)
+{
+    auto a = abs(value);
+
+    if (a < std::numeric_limits<double>::epsilon())
+        return 0;
+
+    auto y = log10(a);
+
+    return (int)floor(y);
 }
