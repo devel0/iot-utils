@@ -165,6 +165,16 @@ int main()
             n = n->next;
         }
     }
+
+    // CRC32
+    {
+        string s = "somedata";
+        auto sWithCRC = appendCRC(s);
+        printf("[%s] with crc = [%s]\n", s.c_str(), sWithCRC.c_str());
+        printf("[%s] has valid crc = %d\n", sWithCRC.c_str(), verifyCRC(sWithCRC));
+        s = "somedata530CBDD1";
+        printf("[%s] has valid crc = %d\n", s.c_str(), verifyCRC(s));
+    }
 }
 ```
 
