@@ -192,6 +192,12 @@ void test_vector()
     TEST_ASSERT_EQUAL_DOUBLE(v[0], 11.12);
 }
 
+void testcrc()
+{
+    TEST_ASSERT_TRUE(verifyCRC("somedata530CBDD0"));
+    TEST_ASSERT_FALSE(verifyCRC("somedata530CBDD1"));
+}
+
 #ifdef ARDUINO
 void setup()
 #else

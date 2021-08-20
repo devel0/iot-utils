@@ -12,6 +12,8 @@
 
 using namespace std;
 
+#ifndef ESP8266
+
 /**
  * @brief convert given double to string
  * 
@@ -21,6 +23,8 @@ using namespace std;
  * @return std::string representation of given value
  */
 string tostr(double d, int decimals = -16, bool trim_leading_zeroes = true);
+
+#endif
 
 /**
  * @brief trim beginning spaces
@@ -36,5 +40,20 @@ string rtrim(const string &str);
  * @brief trim begin and ending spaces
  */
 string trim(const string &str);
+
+/**
+ * @brief create a new string with crc32 appended
+ */
+string appendCRC(const string &str);
+
+/**
+ * @brief remove CRC from string ( latest 8 chars )
+ */
+string removeCRC(const string &str);
+
+/**
+ * @brief returns true if string of form "str...AABBCCDD" contains valid crc32
+ */
+bool verifyCRC(const string& str);
 
 #endif

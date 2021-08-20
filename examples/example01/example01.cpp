@@ -14,7 +14,14 @@ int main()
 {
 
     printf("START\n");
-    
+
+#ifdef ESP8266
+
+    Serial.begin(115200);
+    delay(1000);
+
+#else
+
     // v (size=6) : {1.2, 3.4, 5.6, 7.8, 9.10, 11.12}
     {
         vector<double> v;
@@ -68,6 +75,8 @@ int main()
         printf("%s\n", tostr(400, 1, false).c_str()); // 400.0
         printf("%s\n", tostr(400, 1).c_str());        // 400
     }
+
+#endif
 
 //
 // TIMER
@@ -136,6 +145,15 @@ int main()
             ++i;
             n = n->next;
         }
+    }
+
+    {
+        string s = "somedata";
+        auto sWithCRC = appendCRC(s);
+        printf("[%s] with crc = [%s]\n", s.c_str(), sWithCRC.c_str());
+        printf("[%s] has valid crc = %d\n", sWithCRC.c_str(), verifyCRC(sWithCRC));
+        s = "somedata530CBDD1";
+        printf("[%s] has valid crc = %d\n", s.c_str(), verifyCRC(s));
     }
 
     //

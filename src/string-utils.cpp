@@ -1,5 +1,6 @@
 #include <sstream>
 #include <math.h>
+#include <CRC32.h>
 
 #include "string-utils.h"
 #include "number-utils.h"
@@ -11,6 +12,7 @@ string tostr(double d, int decimals, bool trim_leading_zeroes)
     stringstream ss;
     if (d == 0)
     {
+        printf("d==0\n");
         if (decimals < 0)
             return string("0e0");
 
@@ -46,6 +48,12 @@ string tostr(double d, int decimals, bool trim_leading_zeroes)
         ss << "-";
         b10mantissa = -b10mantissa;
     }
+
+    printf("b10mantissa=%ld\n", b10mantissa);
+    printf("log10(%ld)=%f\n", abs(b10mantissa), log10(abs(b10mantissa)));
+    printf("absDecimals=%d\n", absDecimals);
+    printf("b10exp=%d\n", b10exp);
+    printf("mantLen=%d\n", mantLen);
 
     stringstream sstmp;
     sstmp << b10mantissa;
@@ -215,4 +223,59 @@ string trim(const string &str)
     while (ir > i && ir > 0 && isspace(pstr[ir]))
         --ir;
     return str.substr(i, ir - i + 1);
+}
+
+string appendCRC(const string &str)
+{
+    string res = str;
+
+    int l = str.length();
+    if (l == 0)
+        return "00000000";
+
+    CRC32 crc;
+    for (int i = 0; i < l; ++i)
+    {
+        crc.update(str[i]);
+    }
+    uint32_t chksum = crc.finalize();
+
+    char crcStr[8 + 1];
+    sprintf(crcStr, "%08X", chksum);
+
+    res += crcStr;
+
+    return res;
+}
+
+string removeCRC(const string &str)
+{
+    int l = str.length();
+    if (l > 8)
+        return str.substr(0, l - 8);
+    return "";
+}
+
+bool verifyCRC(const string &str)
+{
+    int l = str.length();
+    if (l <= 8)
+        return str == "00000000";
+
+    CRC32 crc;
+    for (int i = 0; i < l - 8; ++i)
+    {
+        crc.update(str[i]);
+    }
+    uint32_t chksum = crc.finalize();
+
+    char crcStr[8 + 1];
+    sprintf(crcStr, "%08X", chksum);
+
+    for (int j = l - 8; j < l; ++j)
+    {
+        if (str[j] != crcStr[j - (l - 8)])
+            return false;
+    }
+    return true;
 }
