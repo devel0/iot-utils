@@ -1,6 +1,6 @@
 {
     "name": "iot-utils",
-    "version": "2.3.0",
+    "version": "2.4.0",
     "description": "Utilities for ststm32, espressif8266, atmelavr platforms with arduino framework.",
     "keywords": "util,string,double,debounce,crc",
     "authors": {
@@ -30,8 +30,6 @@
         }
     ],
     "dependencies": {
-        "marcoschwartz/LiquidCrystal_I2C": "^1.1.4",
-        "bakercp/CRC32": "^2.0.0"
     },
     "export": {
         "exclude": [

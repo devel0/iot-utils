@@ -33,6 +33,14 @@ Utilities for ststm32, espressif8266, atmelavr platforms with arduino framework.
 
 Install using vscode command palette `PlatformIO: New Terminal` referring to [platformio registry](https://platformio.org/lib/show/11564/iot-utils/installation) cli mode doc.
 
+note: if lib dep fails add them into your platformio.ini as follow:
+
+```
+lib_deps = 	
+	marcoschwartz/LiquidCrystal_I2C@^1.1.4
+	bakercp/CRC32@^2.0.0
+```
+
 ## Examples
 
 ### double to string
