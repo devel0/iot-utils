@@ -78,39 +78,6 @@ int main()
 
 #endif
 
-//
-// TIMER
-//
-#ifdef __MBED__
-    {
-
-        Timer t;
-        t.start();
-        auto clkStart = clock_now(); // rtos::Kernel::Clock::time_point
-
-        ThisThread::sleep_for(795ms);
-
-        auto tDiff = t.elapsed_time();         // std::chrono::microseconds
-        auto clkDiff = clock_now() - clkStart; // std::chrono::milliseconds
-
-        auto clk_s = chrono_s(clkDiff);
-        auto clk_ms = chrono_ms(clkDiff);
-        auto clk_us = chrono_us(clkDiff);
-
-        auto t_s = chrono_s(tDiff);
-        auto t_ms = chrono_ms(tDiff);
-        auto t_us = chrono_us(tDiff);
-
-        // diff using clock (double) .795 s ; 795 ms ; 795000 us
-        printf("diff using clock (double) %s s ; %s ms ; %s us\n",
-               tostr(clk_s, 4).c_str(), tostr(clk_ms, 4).c_str(), tostr(clk_us, 4).c_str());
-
-        // diff using timer (double) .795 s ; 795.033 ms ; 795033 us
-        printf("diff using timer (double) %s s ; %s ms ; %s us\n",
-               tostr(t_s, 4).c_str(), tostr(t_ms, 4).c_str(), tostr(t_us, 4).c_str());
-    }
-#endif
-
     //
     // SIMPLE LINKED LIST
     //

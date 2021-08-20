@@ -559,10 +559,6 @@ Magnitude of given number. (eg. 190 -> 1.9e2 -> 2) (eg. 0.0034 -> 3.4e-3 -> -3)
 #include <Arduino.h>
 #endif
 
-#ifdef __MBED__
-#include <mbed.h>
-#endif
-
 int64_t frexp10(double d, int *expb10);
 
 bool EqualsTol(double tol, double x, double y);

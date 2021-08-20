@@ -1,4 +1,3 @@
-//#include <mbed.h>
 #include <unity.h>
 
 #include <string-utils.h>
@@ -161,21 +160,6 @@ void test_slist()
     TEST_ASSERT_EQUAL(NULL, n->next);
 }
 
-#ifdef __MBED__
-void test_timer()
-{
-    auto t1 = 2150ms;
-
-    auto t_s = chrono_s(t1);
-    auto t_ms = chrono_ms(t1);
-    auto t_us = chrono_us(t1);
-
-    TEST_ASSERT_EQUAL_DOUBLE(2.15, t_s);
-    TEST_ASSERT_EQUAL_DOUBLE(2.15e3, t_ms);
-    TEST_ASSERT_EQUAL_DOUBLE(2.15e6, t_us);
-}
-#endif
-
 void test_vector()
 {
     vector<double> v;
@@ -198,25 +182,16 @@ void testcrc()
     TEST_ASSERT_FALSE(verifyCRC("somedata530CBDD1"));
 }
 
-#ifdef ARDUINO
 void setup()
-#else
-int main()
-#endif
 {
     UNITY_BEGIN();
     RUN_TEST(test_frexp10);
     RUN_TEST(test_tostr);
     RUN_TEST(test_slist);
-#ifdef __MBED__
-    RUN_TEST(test_timer);
-#endif
     RUN_TEST(test_vector);
     UNITY_END();
 }
 
-#ifdef ARDUINO
 void loop()
 {
 }
-#endif

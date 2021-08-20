@@ -1,14 +1,8 @@
 #ifndef _SEARCHATHING_STRING_UTILS_H
 #define _SEARCHATHING_STRING_UTILS_H
 
-#ifdef ARDUINO
 #include <Arduino.h>
 #include <string>
-#endif
-
-#ifdef __MBED__
-#include <mbed.h>
-#endif
 
 using namespace std;
 
