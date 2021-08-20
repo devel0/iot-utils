@@ -28,6 +28,12 @@ title: include/number-utils.h
 | bool | **[LessThanTol](https://github.com/devel0/iot-utils/tree/main/data/api/Files/number-utils_8h.md#function-lessthantol)**(double tol, double x, double y) <br>true if (x < y) AND NOT ( |x-y| <= tol )  |
 | bool | **[LessThanOrEqualsTol](https://github.com/devel0/iot-utils/tree/main/data/api/Files/number-utils_8h.md#function-lessthanorequalstol)**(double tol, double x, double y) <br>true if (x < y) AND ( |x-y| <= tol )  |
 | int | **[CompareTol](https://github.com/devel0/iot-utils/tree/main/data/api/Files/number-utils_8h.md#function-comparetol)**(double tol, double x, double y) <br>return 0 if equalstol, -1 if x<~y or 1 if x>~y  |
+| double | **[ToRad](https://github.com/devel0/iot-utils/tree/main/data/api/Files/number-utils_8h.md#function-torad)**(double angleDeg) <br>convert given angle(deg) to rad  |
+| double | **[ToDeg](https://github.com/devel0/iot-utils/tree/main/data/api/Files/number-utils_8h.md#function-todeg)**(double angleRad) <br>convert given angle(rad) to deg  |
+| double | **[MRound](https://github.com/devel0/iot-utils/tree/main/data/api/Files/number-utils_8h.md#function-mround)**(double value, double multiple) <br>Round the given value using the multiple basis.  |
+| double | **[Sign](https://github.com/devel0/iot-utils/tree/main/data/api/Files/number-utils_8h.md#function-sign)**(int n) <br>returns 1.0 if n>=0 ; -1 otherwise  |
+| double | **[Sign](https://github.com/devel0/iot-utils/tree/main/data/api/Files/number-utils_8h.md#function-sign)**(double n) <br>returns 1.0 if n>=0 ; -1 otherwise  |
+| int | **[Magnitude](https://github.com/devel0/iot-utils/tree/main/data/api/Files/number-utils_8h.md#function-magnitude)**(double value) <br>Magnitude of given number. (eg. 190 -> 1.9e2 -> 2) (eg. 0.0034 -> 3.4e-3 -> -3)  |
 
 
 
@@ -316,6 +322,229 @@ return 0 if equalstol, -1 if x<~y or 1 if x>~y
 
 
 
+### function ToRad
+
+```cpp
+double ToRad(
+    double angleDeg
+)
+```
+
+convert given angle(deg) to rad 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### function ToDeg
+
+```cpp
+double ToDeg(
+    double angleRad
+)
+```
+
+convert given angle(rad) to deg 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### function MRound
+
+```cpp
+double MRound(
+    double value,
+    double multiple
+)
+```
+
+Round the given value using the multiple basis. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### function Sign
+
+```cpp
+double Sign(
+    int n
+)
+```
+
+returns 1.0 if n>=0 ; -1 otherwise 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### function Sign
+
+```cpp
+double Sign(
+    double n
+)
+```
+
+returns 1.0 if n>=0 ; -1 otherwise 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### function Magnitude
+
+```cpp
+int Magnitude(
+    double value
+)
+```
+
+Magnitude of given number. (eg. 190 -> 1.9e2 -> 2) (eg. 0.0034 -> 3.4e-3 -> -3) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -347,6 +576,18 @@ bool LessThanTol(double tol, double x, double y);
 bool LessThanOrEqualsTol(double tol, double x, double y);
 
 int CompareTol(double tol, double x, double y);
+
+double ToRad(double angleDeg);
+
+double ToDeg(double angleRad);
+
+double MRound(double value, double multiple);
+
+double Sign(int n);
+
+double Sign(double n);
+
+int Magnitude(double value);
 
 #endif
 ```
