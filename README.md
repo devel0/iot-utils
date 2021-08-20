@@ -20,7 +20,7 @@ Utilities for ststm32, espressif8266, atmelavr platforms with arduino framework.
 ## API
 
 - [classes](data/api/index_classes.md)
-- core (arduino, mbed)
+- core (arduino)
     - [number-utils](data/api/Files/number-utils_8h.md#file-number-utils.h)
     - [string-utils](data/api/Files/string-utils_8h.md#file-string-utils.h)
     - [timer-utils](data/api/Files/timer-utils_8h.md#file-timer-utils.h)
@@ -38,8 +38,6 @@ Install using vscode command palette `PlatformIO: New Terminal` referring to [pl
 ### double to string
 
 ```cpp
-#include <mbed.h>
-
 #include <number-utils.h>
 #include <string-utils.h>
 #include <timer-utils.h>
@@ -177,34 +175,6 @@ int main()
     }
 }
 ```
-
-## Debugging
-
-to debug examples/example01.cpp (included through [src/debug-main.cpp](src/debug-main.cpp)) it may needed to select only 1 platform from `platformio.ini` so the launch.json will generate accordingly; todo that comment others platform, ie:
-
-```
-[env]
-src_filter = +<*> -<.git/> -<.svn/> -<example/> -<examples/> -<test/> -<tests/>
-
-; [platformio]
-; default_envs = nucleo_f446re, nucleo_f767zi
-
-[env:nucleo_f767zi]
-platform = ststm32
-board = nucleo_f767zi
-framework = mbed
-test_build_project_src = true
-debug_build_flags = -O0 -g -ggdb
-
-; [env:nucleo_f446re]
-; platform = ststm32
-; board = nucleo_f446re
-; framework = mbed
-; test_build_project_src = true
-; debug_build_flags = -O0 -g -ggdb
-```
-
-- [other references/troubleshoot](https://github.com/devel0/iot-stm32-ledblink-interrupt-debug#iot-stm32-ledblink-interrupt-debug)
 
 ## Unit tests
 
