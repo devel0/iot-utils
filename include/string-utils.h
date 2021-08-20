@@ -3,6 +3,7 @@
 
 #ifdef ARDUINO
 #include <Arduino.h>
+#include <string>
 #endif
 
 #ifdef __MBED__

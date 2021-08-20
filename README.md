@@ -15,7 +15,7 @@
 
 ## Description
 
-Utilities for ststm32 platform, mbed os framework.
+Utilities for ststm32, espressif8266, atmelavr platforms with arduino framework.
 
 ## API
 

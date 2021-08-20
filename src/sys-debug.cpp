@@ -23,16 +23,16 @@ void error(const char *fmt, ...)
         // print error
         const int dstBufSize = 256;
         char dstBuf[dstBufSize];
-        sys_printer->printf("\nERROR : ");
+        sys_printer->print("\nERROR : ");
 
         va_list args;
         va_start(args, fmt);
         vsnprintf(dstBuf, dstBufSize, fmt, args);
         va_end(args);
 
-        sys_printer->printf(dstBuf);
+        sys_printer->print(dstBuf);
 
-        sys_printer->printf("\n");
+        sys_printer->print("\n");
 
         sys_printer->flush();
     }
@@ -56,16 +56,16 @@ void debug(const char *fmt, ...)
     {        
         const int dstBufSize = 256;
         char dstBuf[dstBufSize];
-        sys_printer->printf("\nDEBUG : ");
+        sys_printer->print("\nDEBUG : ");
 
         va_list args;
         va_start(args, fmt);
         vsnprintf(dstBuf, dstBufSize, fmt, args);
         va_end(args);
 
-        sys_printer->printf(dstBuf);
+        sys_printer->print(dstBuf);
 
-        sys_printer->printf("\n");
+        sys_printer->print("\n");
 
         sys_printer->flush();
     }
