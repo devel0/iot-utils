@@ -1,6 +1,5 @@
 #include <sstream>
 #include <math.h>
-#include <CRC32.h>
 
 #include "string-utils.h"
 #include "number-utils.h"

@@ -1,6 +1,6 @@
 {
     "name": "iot-utils",
-    "version": "2.7.0",
+    "version": "2.8.0",
     "description": "Utilities for ststm32, espressif8266, atmelavr platforms with arduino framework.",
     "keywords": "util,string,double,debounce,crc",
     "authors": {
