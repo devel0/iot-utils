@@ -225,56 +225,58 @@ string trim(const string &str)
     return str.substr(i, ir - i + 1);
 }
 
-string appendCRC(const string &str)
+int computeChecksum(const String &str)
 {
-    string res = str;
+    int res = 0;
+    int l = str.length();
+    for (int i = 0; i < l; ++i)
+    {
+        if (i == 0)
+            res = str[i];
+        else
+            res = res ^ str[i];
+    }
+    return res;
+}
+
+String appendChecksum(const String &str)
+{
+    String res = str;
 
     int l = str.length();
     if (l == 0)
-        return "00000000";
+        return "00";
 
-    CRC32 crc;
-    for (int i = 0; i < l; ++i)
-    {
-        crc.update(str[i]);
-    }
-    uint32_t chksum = crc.finalize();
-
-    char crcStr[8 + 1];
-    sprintf(crcStr, "%08X", chksum);
+    char crcStr[2 + 1];
+    sprintf(crcStr, "%02X", computeChecksum(str));
 
     res += crcStr;
 
     return res;
 }
 
-string removeCRC(const string &str)
+String removeChecksum(const String &str)
 {
     int l = str.length();
     if (l > 8)
-        return str.substr(0, l - 8);
+        return str.substring(0, l - 2);
     return "";
 }
 
-bool verifyCRC(const string &str)
+bool verifyChecksum(const String &str)
 {
     int l = str.length();
-    if (l <= 8)
-        return str == "00000000";
+    if (l <= 2)
+        return str == "00";
 
-    CRC32 crc;
-    for (int i = 0; i < l - 8; ++i)
+    int chksum = computeChecksum(str.substring(0, l - 2));
+
+    char crcStr[2 + 1];
+    sprintf(crcStr, "%02X", chksum);    
+
+    for (int j = l - 2; j < l; ++j)
     {
-        crc.update(str[i]);
-    }
-    uint32_t chksum = crc.finalize();
-
-    char crcStr[8 + 1];
-    sprintf(crcStr, "%08X", chksum);
-
-    for (int j = l - 8; j < l; ++j)
-    {
-        if (str[j] != crcStr[j - (l - 8)])
+        if (str[j] != crcStr[j - (l - 2)])
             return false;
     }
     return true;

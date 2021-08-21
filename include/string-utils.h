@@ -36,18 +36,23 @@ string rtrim(const string &str);
 string trim(const string &str);
 
 /**
- * @brief create a new string with crc32 appended
+ * @brief compute xor checksum of given string
  */
-string appendCRC(const string &str);
+int computeChecksum(const String &str);
 
 /**
- * @brief remove CRC from string ( latest 8 chars )
+ * @brief create a new string with xor checksum appended
  */
-string removeCRC(const string &str);
+String appendChecksum(const String &str);
 
 /**
- * @brief returns true if string of form "str...AABBCCDD" contains valid crc32
+ * @brief remove xor checksum from string ( latest 2 chars )
  */
-bool verifyCRC(const string& str);
+String removeChecksum(const String &str);
+
+/**
+ * @brief returns true if string of form "str...XX" contains valid xor checksum
+ */
+bool verifyChecksum(const String& str);
 
 #endif

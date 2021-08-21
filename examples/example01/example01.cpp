@@ -114,13 +114,10 @@ int main()
         }
     }
 
-    {
-        string s = "somedata";
-        auto sWithCRC = appendCRC(s);
-        printf("[%s] with crc = [%s]\n", s.c_str(), sWithCRC.c_str());
-        printf("[%s] has valid crc = %d\n", sWithCRC.c_str(), verifyCRC(sWithCRC));
-        s = "somedata530CBDD1";
-        printf("[%s] has valid crc = %d\n", s.c_str(), verifyCRC(s));
+    {        
+        printf("[%s] into crc [%s]\n", "CURTIME 1629505672 2021-08-21T00:27:52Z",
+               appendChecksum("CURTIME 1629505672 2021-08-21T00:27:52Z").c_str());
+        printf("valid = %d\n", verifyChecksum("CURTIME 1629505672 2021-08-21T00:27:52Z58"));
     }
 
     //

@@ -178,8 +178,8 @@ void test_vector()
 
 void testcrc()
 {
-    TEST_ASSERT_TRUE(verifyCRC("somedata530CBDD0"));
-    TEST_ASSERT_FALSE(verifyCRC("somedata530CBDD1"));
+    TEST_ASSERT_TRUE(verifyCRC("somdata04"));
+    TEST_ASSERT_FALSE(verifyCRC("somdata05"));
 }
 
 void setup()
