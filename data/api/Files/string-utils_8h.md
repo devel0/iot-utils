@@ -25,9 +25,10 @@ title: include/string-utils.h
 | string | **[ltrim](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-ltrim)**(const string & str) <br>trim beginning spaces  |
 | string | **[rtrim](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-rtrim)**(const string & str) <br>trim ending spaces  |
 | string | **[trim](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-trim)**(const string & str) <br>trim begin and ending spaces  |
-| string | **[appendCRC](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-appendcrc)**(const string & str) <br>create a new string with crc32 appended  |
-| string | **[removeCRC](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-removecrc)**(const string & str) <br>remove CRC from string ( latest 8 chars )  |
-| bool | **[verifyCRC](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-verifycrc)**(const string & str) <br>returns true if string of form "str...AABBCCDD" contains valid crc32  |
+| int | **[computeChecksum](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-computechecksum)**(const String & str) <br>compute xor checksum of given string  |
+| String | **[appendChecksum](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-appendchecksum)**(const String & str) <br>create a new string with xor checksum appended  |
+| String | **[removeChecksum](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-removechecksum)**(const String & str) <br>remove xor checksum from string ( latest 2 chars )  |
+| bool | **[verifyChecksum](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#function-verifychecksum)**(const String & str) <br>returns true if string of form "str...XX" contains valid xor checksum  |
 
 
 
@@ -195,15 +196,15 @@ trim begin and ending spaces
 
 
 
-### function appendCRC
+### function computeChecksum
 
 ```cpp
-string appendCRC(
-    const string & str
+int computeChecksum(
+    const String & str
 )
 ```
 
-create a new string with crc32 appended 
+compute xor checksum of given string 
 
 
 
@@ -232,15 +233,15 @@ create a new string with crc32 appended
 
 
 
-### function removeCRC
+### function appendChecksum
 
 ```cpp
-string removeCRC(
-    const string & str
+String appendChecksum(
+    const String & str
 )
 ```
 
-remove CRC from string ( latest 8 chars ) 
+create a new string with xor checksum appended 
 
 
 
@@ -269,15 +270,52 @@ remove CRC from string ( latest 8 chars )
 
 
 
-### function verifyCRC
+### function removeChecksum
 
 ```cpp
-bool verifyCRC(
-    const string & str
+String removeChecksum(
+    const String & str
 )
 ```
 
-returns true if string of form "str...AABBCCDD" contains valid crc32 
+remove xor checksum from string ( latest 2 chars ) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### function verifyChecksum
+
+```cpp
+bool verifyChecksum(
+    const String & str
+)
+```
+
+returns true if string of form "str...XX" contains valid xor checksum 
 
 
 
@@ -333,11 +371,13 @@ string rtrim(const string &str);
 
 string trim(const string &str);
 
-string appendCRC(const string &str);
+int computeChecksum(const String &str);
 
-string removeCRC(const string &str);
+String appendChecksum(const String &str);
 
-bool verifyCRC(const string& str);
+String removeChecksum(const String &str);
+
+bool verifyChecksum(const String& str);
 
 #endif
 ```
