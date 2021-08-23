@@ -11,7 +11,7 @@ string tostr(double d, int decimals, bool trim_leading_zeroes)
     stringstream ss;
     if (d == 0)
     {
-        printf("d==0\n");
+        // printf("d==0\n");
         if (decimals < 0)
             return string("0e0");
 
@@ -48,11 +48,11 @@ string tostr(double d, int decimals, bool trim_leading_zeroes)
         b10mantissa = -b10mantissa;
     }
 
-    printf("b10mantissa=%ld\n", b10mantissa);
-    printf("log10(%ld)=%f\n", abs(b10mantissa), log10(abs(b10mantissa)));
-    printf("absDecimals=%d\n", absDecimals);
-    printf("b10exp=%d\n", b10exp);
-    printf("mantLen=%d\n", mantLen);
+    // printf("b10mantissa=%ld\n", b10mantissa);
+    // printf("log10(%ld)=%f\n", abs(b10mantissa), log10(abs(b10mantissa)));
+    // printf("absDecimals=%d\n", absDecimals);
+    // printf("b10exp=%d\n", b10exp);
+    // printf("mantLen=%d\n", mantLen);
 
     stringstream sstmp;
     sstmp << b10mantissa;
