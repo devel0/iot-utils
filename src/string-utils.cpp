@@ -30,7 +30,8 @@ string tostr(double d, int decimals, bool trim_leading_zeroes)
     // provide rounding
     int b10exp = 0;
     int64_t b10mantissa = frexp10(d, &b10exp);
-    int mantLen = round(log10(abs(b10mantissa))) + 1;
+    auto l10 = log10(abs(b10mantissa));
+    int mantLen = round(l10) + 1;
     bool sciMode = abs(mantLen + b10exp) > 15 || decimals < 0;
     int absDecimals = decimals < 0 ? -decimals : decimals;
 

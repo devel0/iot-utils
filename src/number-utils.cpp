@@ -31,16 +31,15 @@ int64_t frexp10(double d, int *expb10)
     int b2exp;
     double b2mantissa = frexp(d, &b2exp); // d = b2mantissa * pow(2, b2exp)
 
-    // double a = b2mantissa * exp2(b2exp);
-    // double c = 0;
-    // int b10exp = round(log10(abs(a))) + 1;
-    // int ee = 17 - b10exp;
-    // double b = pow(10, ee);
-    // c = a * b;
-    // *expb10 = -ee;
+    double a = b2mantissa * exp2(b2exp);
+    double c = 0;
+    int b10exp = round(log10(abs(a))) + 1;
+    int ee = 17 - b10exp;
+    double b = pow(10, ee);
+    c = a * b;
+    *expb10 = -ee;
 
-    // return c;
-    return 0;
+    return c;    
 }
 
 bool EqualsTol(double tol, double x, double y)
@@ -89,13 +88,12 @@ double ToDeg(double angleRad)
 
 double MRound(double value, double multiple)
 {
-    // if (abs(multiple) < std::numeric_limits<double>::epsilon())
-    //     return value;
+    if (abs(multiple) < std::numeric_limits<double>::epsilon())
+        return value;
 
-    // auto p = ::round(value / multiple);
+    auto p = ::round(value / multiple);
 
-    // return trunc(p) * multiple;
-    return 0;
+    return trunc(p) * multiple;    
 }
 
 double Sign(int n)
@@ -113,14 +111,13 @@ double Sign(double n)
 }
 
 int Magnitude(double value)
-{
-    return 0;
-    // auto a = abs(value);
+{    
+    auto a = abs(value);
 
-    // if (a < std::numeric_limits<double>::epsilon())
-    //     return 0;
+    if (a < std::numeric_limits<double>::epsilon())
+        return 0;
 
-    // auto y = log10(a);
+    auto y = log10(a);
 
-    // return (int)floor(y);
+    return (int)floor(y);
 }

@@ -169,17 +169,17 @@ void test_vector()
     TEST_ASSERT_EQUAL(v.size(), 6);
 
     TEST_ASSERT_EQUAL_DOUBLE(v[0], 1.2);
-    TEST_ASSERT_EQUAL_DOUBLE(v[0], 3.4);
-    TEST_ASSERT_EQUAL_DOUBLE(v[0], 5.6);
-    TEST_ASSERT_EQUAL_DOUBLE(v[0], 7.8);
-    TEST_ASSERT_EQUAL_DOUBLE(v[0], 9.10);
-    TEST_ASSERT_EQUAL_DOUBLE(v[0], 11.12);
+    TEST_ASSERT_EQUAL_DOUBLE(v[1], 3.4);
+    TEST_ASSERT_EQUAL_DOUBLE(v[2], 5.6);
+    TEST_ASSERT_EQUAL_DOUBLE(v[3], 7.8);
+    TEST_ASSERT_EQUAL_DOUBLE(v[4], 9.10);
+    TEST_ASSERT_EQUAL_DOUBLE(v[5], 11.12);
 }
 
 void testcrc()
 {
-    TEST_ASSERT_TRUE(verifyCRC("somdata04"));
-    TEST_ASSERT_FALSE(verifyCRC("somdata05"));
+    TEST_ASSERT_TRUE(verifyChecksum("somdata04"));
+    TEST_ASSERT_FALSE(verifyChecksum("somdata05"));
 }
 
 void setup()
