@@ -257,7 +257,7 @@ String appendChecksum(const String &str)
 String removeChecksum(const String &str)
 {
     int l = str.length();
-    if (l > 8)
+    if (l > 2)
         return str.substring(0, l - 2);
     return "";
 }
