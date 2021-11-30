@@ -1,8 +1,6 @@
 #ifndef _SYS_DEBUG_H
 #define _SYS_DEBUG_H
 
-#ifdef ARDUINO
-
 #include <Arduino.h>
 
 /**
@@ -42,8 +40,6 @@ void error();
 #define debug(fmt, ...) {}
 #else
 void debug(const char *fmt, ...);
-#endif
-
 #endif
 
 #endif

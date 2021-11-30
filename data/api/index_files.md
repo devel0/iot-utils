@@ -17,7 +17,6 @@ title: Files
     * **file [include/slist.h](https://github.com/devel0/iot-utils/tree/main/data/api/Files/slist_8h.md#file-slist.h)** 
     * **file [include/string-utils.h](https://github.com/devel0/iot-utils/tree/main/data/api/Files/string-utils_8h.md#file-string-utils.h)** 
     * **file [include/sys-debug.h](https://github.com/devel0/iot-utils/tree/main/data/api/Files/sys-debug_8h.md#file-sys-debug.h)** 
-    * **file [include/timer-utils.h](https://github.com/devel0/iot-utils/tree/main/data/api/Files/timer-utils_8h.md#file-timer-utils.h)** 
     * **file [include/vector-utils.h](https://github.com/devel0/iot-utils/tree/main/data/api/Files/vector-utils_8h.md#file-vector-utils.h)** 
 
 

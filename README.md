@@ -23,7 +23,6 @@ Utilities for ststm32, espressif8266, atmelavr platforms with arduino framework.
 - core (arduino)
     - [number-utils](data/api/Files/number-utils_8h.md#file-number-utils.h)
     - [string-utils](data/api/Files/string-utils_8h.md#file-string-utils.h)
-    - [timer-utils](data/api/Files/timer-utils_8h.md#file-timer-utils.h)
     - [constant-utils](data/api/Files/constant-utils_8h.md#file-constant-utils.h)
     - [vector-utils](data/api/Files/vector-utils_8h.md#file-vector-utils.h)
 - dev
@@ -102,38 +101,7 @@ int main()
 
         printf("%s\n", tostr(400, 1, false).c_str()); // 400.0
         printf("%s\n", tostr(400, 1).c_str());        // 400
-    }
-
-    //
-    // TIMER
-    //
-    {
-
-        Timer t;
-        t.start();
-        auto clkStart = clock_now(); // rtos::Kernel::Clock::time_point
-
-        ThisThread::sleep_for(795ms);
-
-        auto tDiff = t.elapsed_time();         // std::chrono::microseconds
-        auto clkDiff = clock_now() - clkStart; // std::chrono::milliseconds
-
-        auto clk_s = chrono_s(clkDiff);
-        auto clk_ms = chrono_ms(clkDiff);
-        auto clk_us = chrono_us(clkDiff);
-
-        auto t_s = chrono_s(tDiff);
-        auto t_ms = chrono_ms(tDiff);
-        auto t_us = chrono_us(tDiff);
-
-        // diff using clock (double) .795 s ; 795 ms ; 795000 us
-        printf("diff using clock (double) %s s ; %s ms ; %s us\n",
-            tostr(clk_s, 4).c_str(), tostr(clk_ms, 4).c_str(), tostr(clk_us, 4).c_str());
-
-        // diff using timer (double) .795 s ; 795.033 ms ; 795033 us
-        printf("diff using timer (double) %s s ; %s ms ; %s us\n",
-            tostr(t_s, 4).c_str(), tostr(t_ms, 4).c_str(), tostr(t_us, 4).c_str());
-    }
+    }    
 
     //
     // SIMPLE LINKED LIST
@@ -193,23 +161,24 @@ To execute tests, from vscode command palette `PlatformIO: New Terminal` then
 pio test
 ```
 
-when started from vscode command palette `PlatformIO: Serial Monitor` (ctrl+alt+s) see test results.
+make sure serial monitor is closed
 
 ```
-> Executing task: pio device monitor <
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
 
---- Available filters and text transformations: colorize, debug, default, direct, hexlify, log2file, nocontrol, printable, send_on_enter, time
---- More details at http://bit.ly/pio-monitor-filters
---- Miniterm on /dev/ttyACM0  9600,8,N,1 ---
---- Quit: Ctrl+C | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
-test/test-main.cpp:171:test_frexp10     [PASSED]
-test/test-main.cpp:172:test_tostr       [PASSED]
-test/test-main.cpp:173:test_slist       [PASSED]
-test/test-main.cpp:174:test_timer       [PASSED]
-
+test/test-main.cpp:187:test_frexp10     [PASSED]
+test/test-main.cpp:188:test_tostr       [PASSED]
+test/test-main.cpp:189:test_slist       [PASSED]
+test/test-main.cpp:190:test_vector      [PASSED]
 -----------------------
-4 Tests 0 Failures 0 Ignored 
-OK
+4 Tests 0 Failures 0 Ignored
+========================================= [PASSED] Took 12.59 seconds =========================================
+
+Test    Environment    Status    Duration
+------  -------------  --------  ------------
+*       nucleo_f446re  PASSED    00:00:12.592
+========================================= 1 succeeded in 00:00:12.592 =========================================
 ```
 
 note: you may need to press RESET btn when in monitor to run tests

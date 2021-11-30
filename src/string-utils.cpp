@@ -6,6 +6,8 @@
 
 using namespace std;
 
+#ifdef ARDUINO_ARCH_STM32
+
 string tostr(double d, int decimals, bool trim_leading_zeroes)
 {
     stringstream ss;
@@ -176,14 +178,16 @@ string tostr(double d, int decimals, bool trim_leading_zeroes)
             for (int k = 0; k <= w; ++k) // 1234.56
             {
                 if (s[k] == '.' && w == k) // 400.00 => 400. -> 400
-                    break;
+                    break;                
                 sst << s[k];
             }
 
             if (sciMode)
             {
                 for (int k = v; k < sl; ++k) // 1234.56e9
-                    sst << s[k];
+                {
+                    sst << s[k];                    
+                }
             }
 
             return sst.str();
@@ -192,6 +196,8 @@ string tostr(double d, int decimals, bool trim_leading_zeroes)
 
     return s;
 }
+
+#endif
 
 string ltrim(const string &str)
 {
@@ -272,7 +278,7 @@ bool verifyChecksum(const String &str)
     int chksum = computeChecksum(str.substring(0, l - 2));
 
     char crcStr[2 + 1];
-    sprintf(crcStr, "%02X", chksum);    
+    sprintf(crcStr, "%02X", chksum);
 
     for (int j = l - 2; j < l; ++j)
     {

@@ -2,25 +2,27 @@
 
 #include <number-utils.h>
 #include <string-utils.h>
-#include <timer-utils.h>
 #include <slist.h>
 #include <vector-utils.h>
 
-#if defined(ARDUINO)
-void setup()
-#else
-int main()
-#endif
+void hr()
 {
+    for (int i = 0; i < 40; ++i)
+        Serial.print('-');
+    Serial.println();
+}
 
-    printf("START\n");
-
-#ifdef ESP8266
-
+void setup()
+{
     Serial.begin(115200);
     delay(1000);
+    Serial.println("START");
 
-#else
+    Serial.println();
+    Serial.println("TOSTR");
+    hr();
+
+#ifdef ARDUINO_ARCH_STM32
 
     // v (size=6) : {1.2, 3.4, 5.6, 7.8, 9.10, 11.12}
     {
@@ -28,55 +30,61 @@ int main()
         FoldPushBack(v, 1.2, 3.4, 5.6, 7.8);
         FoldPushBack(v, 9.10, 11.12);
 
-        printf("v (size=%d) : {", v.size());
+        Serial.print("v (size=");
+        Serial.print(v.size());
+        Serial.print(") : {");
         for (int i = 0; i < v.size(); ++i)
         {
-            printf("%s%s", i > 0 ? ", " : "", tostr(v[i], 2).c_str());
+            Serial.print(i > 0 ? ", " : "");
+            Serial.print(tostr(v[i], 2).c_str());
         }
-        printf("}\n");
+        Serial.println("}");
     }
 
     //
     // DOUBLE TO STRING
     //
     {
-        printf("%s\n", tostr(1, 4, false).c_str()); // 1.0000
-        printf("%s\n", tostr(0, 2).c_str());        // 0
-        printf("%s\n", tostr(0, 2, false).c_str()); // 0.00
+        Serial.println(tostr(1, 4, false).c_str()); // 1.0000
+        Serial.println(tostr(0, 2).c_str());        // 0
+        Serial.println(tostr(0, 2, false).c_str()); // 0.00
 
-        printf("%s\n", tostr(1234.5678901234567, 4).c_str());  // 1234.5679
-        printf("%s\n", tostr(-1234.5678901234567, 4).c_str()); // -1234.5679
+        Serial.println(tostr(1234.5678901234567, 4).c_str());  // 1234.5679
+        Serial.println(tostr(-1234.5678901234567, 4).c_str()); // -1234.5679
 
-        printf("%s\n", tostr(1234.5678901234567, 10).c_str());  // 1234.5678901235
-        printf("%s\n", tostr(-1234.5678901234567, 10).c_str()); // -1234.5678901235
+        Serial.println(tostr(1234.5678901234567, 10).c_str());  // 1234.5678901235
+        Serial.println(tostr(-1234.5678901234567, 10).c_str()); // -1234.5678901235
 
-        printf("%s\n", tostr(1234.5678901234567e-8, 6).c_str());  // 0.000012
-        printf("%s\n", tostr(-1234.5678901234567e-8, 6).c_str()); // -0.000012
+        Serial.println(tostr(1234.5678901234567e-8, 6).c_str());  // 0.000012
+        Serial.println(tostr(-1234.5678901234567e-8, 6).c_str()); // -0.000012
 
-        printf("%s\n", tostr(1234.5678901234567e100, 6).c_str());  // 1.234568e103
-        printf("%s\n", tostr(-1234.5678901234567e100, 6).c_str()); // -1.234568e103
+        Serial.println(tostr(1234.5678901234567e100, 6).c_str());  // 1.234568e103
+        Serial.println(tostr(-1234.5678901234567e100, 6).c_str()); // -1.234568e103
 
-        printf("%s\n", tostr(1234.5678901234567e-100, 6).c_str());  // 1.234568e-97
-        printf("%s\n", tostr(-1234.5678901234567e-100, 6).c_str()); // -1.234568e-97
+        Serial.println(tostr(1234.5678901234567e-100, 6).c_str());  // 1.234568e-97
+        Serial.println(tostr(-1234.5678901234567e-100, 6).c_str()); // -1.234568e-97
 
-        printf("%s\n", tostr(1).c_str());              // 1e0
-        printf("%s\n", tostr(1e20).c_str());           // 1e20
-        printf("%s\n", tostr(1e20, 4).c_str());        // 1e20
-        printf("%s\n", tostr(1e20, 4, false).c_str()); // 1.0000e20
-        printf("%s\n", tostr(1, 4, false).c_str());    // 1.0000
-        printf("%s\n", tostr(1.01200).c_str());        // 1.012e0
+        Serial.println(tostr(1).c_str());              // 1e0
+        Serial.println(tostr(1e20).c_str());           // 1e20
+        Serial.println(tostr(1e20, 4).c_str());        // 1e20
+        Serial.println(tostr(1e20, 4, false).c_str()); // 1.0000e20
+        Serial.println(tostr(1, 4, false).c_str());    // 1.0000
+        Serial.println(tostr(1.01200).c_str());        // 1.012e0
 
-        printf("%s\n", tostr(1234.5678, 0, false).c_str());     // 1235
-        printf("%s\n", tostr(1234.5678, 1, false).c_str());     // 1234.6
-        printf("%s\n", tostr(0.00012345678, 0, false).c_str()); // 0
-        printf("%s\n", tostr(0.00012345678, 4, false).c_str()); // 0.0001
-        printf("%s\n", tostr(0.00012345678, 8, false).c_str()); // 0.00012346
+        Serial.println(tostr(1234.5678, 0, false).c_str());     // 1235
+        Serial.println(tostr(1234.5678, 1, false).c_str());     // 1234.6
+        Serial.println(tostr(0.00012345678, 0, false).c_str()); // 0
+        Serial.println(tostr(0.00012345678, 4, false).c_str()); // 0.0001
+        Serial.println(tostr(0.00012345678, 8, false).c_str()); // 0.00012346
 
-        printf("%s\n", tostr(400, 1, false).c_str()); // 400.0
-        printf("%s\n", tostr(400, 1).c_str());        // 400
+        Serial.println(tostr(400, 1, false).c_str()); // 400.0
+        Serial.println(tostr(400, 1).c_str());        // 400
     }
-
 #endif
+
+    Serial.println();
+    Serial.println("SIMPLE LINKED LIST");
+    hr();
 
     //
     // SIMPLE LINKED LIST
@@ -97,7 +105,10 @@ int main()
 
         while (i < l)
         {
-            printf("lst[%d] = %d\n", i, lst.Get(i));
+            Serial.print("lst[");
+            Serial.print(i);
+            Serial.print("] = ");
+            Serial.println(lst.Get(i));
             ++i;
         }
 
@@ -107,17 +118,30 @@ int main()
         i = 0;
         while (n != NULL)
         {
-            printf("lst[%d] = %d\n", i, n->data);
+            Serial.print("lst[");
+            Serial.print(i);
+            Serial.print("] = ");
+            Serial.println(n->data);
 
             ++i;
             n = n->next;
         }
     }
 
-    {        
-        printf("[%s] into crc [%s]\n", "CURTIME 1629505672 2021-08-21T00:27:52Z",
-               appendChecksum("CURTIME 1629505672 2021-08-21T00:27:52Z").c_str());
-        printf("valid = %d\n", verifyChecksum("CURTIME 1629505672 2021-08-21T00:27:52Z58"));
+    Serial.println();
+    Serial.println("CRC");
+    hr();
+
+    {
+        const char *str = "CURTIME 1629505672 2021-08-21T00:27:52Z";
+        Serial.print("[");
+        Serial.print(str);
+        Serial.print("] into crc [");
+        Serial.print(appendChecksum(str).c_str());
+        Serial.println("]");
+
+        Serial.print("valid = ");
+        Serial.println(verifyChecksum("CURTIME 1629505672 2021-08-21T00:27:52Z58"));
     }
 
     //
@@ -126,10 +150,8 @@ int main()
     //
 }
 
-#if defined(ARDUINO)
 void loop()
 {
 }
-#endif
 
 #endif

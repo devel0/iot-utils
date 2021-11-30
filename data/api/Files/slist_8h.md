@@ -41,13 +41,7 @@ title: include/slist.h
 #ifndef _SEARCHATHING_IOT_UTILS_SLIST_H
 #define _SEARCHATHING_IOT_UTILS_SLIST_H
 
-#ifdef ARDUINO
 #include <Arduino.h>
-#endif
-
-#ifdef __MBED__
-#include <mbed.h>
-#endif
 
 template <class T>
 class SListNode

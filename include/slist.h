@@ -1,13 +1,7 @@
 #ifndef _SEARCHATHING_IOT_UTILS_SLIST_H
 #define _SEARCHATHING_IOT_UTILS_SLIST_H
 
-#ifdef ARDUINO
 #include <Arduino.h>
-#endif
-
-#ifdef __MBED__
-#include <mbed.h>
-#endif
 
 /**
  * @brief Templated simple linked-list node element.

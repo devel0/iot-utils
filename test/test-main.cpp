@@ -3,7 +3,6 @@
 #include <string-utils.h>
 #include <number-utils.h>
 #include <constant-utils.h>
-#include <timer-utils.h>
 #include <slist.h>
 #include <vector-utils.h>
 

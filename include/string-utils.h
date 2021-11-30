@@ -2,11 +2,12 @@
 #define _SEARCHATHING_STRING_UTILS_H
 
 #include <Arduino.h>
+
 #include <string>
 
 using namespace std;
 
-#ifndef ESP8266
+#ifdef ARDUINO_ARCH_STM32
 
 /**
  * @brief convert given double to string

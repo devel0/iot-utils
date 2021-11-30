@@ -1,8 +1,6 @@
 #ifndef _DEBOUNCED_BUTTON_H
 #define _DEBOUNCED_BUTTON_H
 
-#ifdef ARDUINO
-
 #include <Arduino.h>
 
 #include <vector>
@@ -40,7 +38,5 @@ public:
 
     int getPressCount() const;
 };
-
-#endif
 
 #endif
